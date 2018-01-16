@@ -1,0 +1,53 @@
+
+Log started (V12.7.1.0) Mon Aug 21 23:08:46 2017
+
+
+Problem 'mincostflow.lp' read.
+Read time = 0.02 sec. (0.01 ticks)
+CPXPARAM_Read_APIEncoding                        "UTF-8"
+Tried aggregator 1 time.
+MIP Presolve eliminated 73 rows and 0 columns.
+MIP Presolve modified 42 coefficients.
+Reduced MIP has 111 rows, 87 columns, and 363 nonzeros.
+Reduced MIP has 42 binaries, 45 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.27 ticks)
+Probing time = 0.00 sec. (0.03 ticks)
+Cover probing fixed 0 vars, tightened 3 bounds.
+Tried aggregator 1 time.
+MIP Presolve modified 84 coefficients.
+Reduced MIP has 111 rows, 87 columns, and 363 nonzeros.
+Reduced MIP has 42 binaries, 45 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.27 ticks)
+Probing time = 0.00 sec. (0.02 ticks)
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: deterministic, using up to 8 threads.
+Root relaxation solution time = 0.00 sec. (0.14 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+      0     0        0.0000     7                      0.0000        8         
+      0     0        0.0000     9                     Cuts: 4       11         
+      0     0        0.0000     7                     Cuts: 4       15         
+      0     0        cutoff                                         15         
+Elapsed time = 0.02 sec. (7.06 ticks, tree = 0.01 MB, solutions = 0)
+
+Lift and project cuts applied:  2
+Gomory fractional cuts applied:  2
+
+Root node processing (before b&c):
+  Real time             =    0.02 sec. (7.06 ticks)
+Parallel b&c, 8 threads:
+  Real time             =    0.00 sec. (0.00 ticks)
+  Sync time (average)   =    0.00 sec.
+  Wait time (average)   =    0.00 sec.
+                          ------------
+Total (root+branch&cut) =    0.02 sec. (7.06 ticks)
+
+
+MIP - Integer infeasible.
+Current MIP best bound is infinite.
+Solution time =    0.02 sec.  Iterations = 15  Nodes = 0
+Deterministic time = 7.06 ticks  (470.89 ticks/sec)
+
