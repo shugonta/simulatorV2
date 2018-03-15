@@ -381,7 +381,7 @@ while True:
 
             # 目的関数を設定し，最小化を行うことを明示する
             m.setObjective(grb.quicksum(
-                grb.quicksum(y[k, i, j] * current_link_list[(i, j)].bandwidth for (i, j) in current_available_link_list)
+                grb.quicksum(y[k, i, j] * current_link_list[(i, j)].distance for (i, j) in current_available_link_list)
                 for k in K),
                 grb.GRB.MINIMIZE)  # 目的関数
             # m.setAttr("ModelSense", grb.GRB.MINIMIZE)
@@ -554,7 +554,7 @@ while True:
 
             # 目的関数を設定し，最小化を行うことを明示する
             m.setObjective(grb.quicksum(
-                grb.quicksum(y[k, i, j] * current_link_list2[(i, j)].bandwidth for (i, j) in
+                grb.quicksum(y[k, i, j] * current_link_list2[(i, j)].distance for (i, j) in
                              current_available_link_list)
                 for k in K),
                 grb.GRB.MINIMIZE)  # 目的関数
@@ -726,7 +726,7 @@ while True:
 
             # 目的関数を設定し，最小化を行うことを明示する
             m.setObjective(grb.quicksum(
-                grb.quicksum(y[k, i, j] * current_link_list3[(i, j)].bandwidth for (i, j) in
+                grb.quicksum(y[k, i, j] * current_link_list3[(i, j)].distance for (i, j) in
                              current_available_link_list)
                 for k in K),
                 grb.GRB.MINIMIZE)  # 目的関数
