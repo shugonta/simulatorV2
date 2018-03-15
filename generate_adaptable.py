@@ -63,12 +63,12 @@ def get_scale_rand():
     #     return 20
     # else:
     #     return 100
-    return 10
+    return 20
 
 
 def get_initial_age():
-    return rnd.randint(0, get_scale_rand())
-    # return 0
+    # return rnd.randint(0, get_scale_rand())
+    return 0
 
 
 def load_topology(p_file_path, p_link_list):

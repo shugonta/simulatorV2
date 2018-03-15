@@ -32,7 +32,7 @@ q = 5  # 終点
 M = 3  # 経路数
 K = range(1, M + 1)
 
-required_capacity =250
+required_capacity = 50
 quality = 1
 c_max = 13
 
@@ -51,7 +51,7 @@ for n in N:
     link_used_cost[n] = LinkUsedCostFunc(link_used_cost_threshold[n])
 
 
-def Optimize(assigned_capacity, t):
+def Optimize(m, assigned_capacity, t):
     for (i, j) in links:
         reliability[i, j] = math.exp(-1 * 0.01 * t)
 
@@ -63,7 +63,6 @@ def Optimize(assigned_capacity, t):
     # reliability = dict(zip(links, [0.740818221, 0.990049834, 0.990049834, 0.990049834, 0.990049834, 0.740818221]))
 
     # print "%s:\t%8.4f" % (x[i, j].VarName, x[i, j].X)
-    m = grb.Model()
     m.setParam('OutputFlag', False)
     # 変数は辞書型変数に格納
     x = {}
@@ -104,9 +103,10 @@ def Optimize(assigned_capacity, t):
         m.addConstr(0 <= grb.quicksum(y[k, i, j] for k in K) <= capacity[i, j], name="capacity requirement at (%d, %d)" % (i, j))
         # m.addConstr(0 <= grb.quicksum(y[k, i, j] for k in K) <= min(capacity[i, j], assigned_capacity), name="capacity requirement at (%d, %d)" % (i, j))
         m.addConstr(grb.quicksum(z[n, i, j] for n in N) == 1, name="restrict link used cost func for link (%d, %d)" % (i, j))
-        for n in N:
-            m.addConstr(grb.quicksum(y[k, i, j] for k in K) / capacity[i, j] * z[n, i, j] <= link_used_cost_threshold[n] * z[n, i, j],
-                        name="link occupation rate for link (%d, %d) at cost %d" % (i, j, n))
+        if capacity[i, j] != 0:
+            for n in N:
+                m.addConstr(grb.quicksum(y[k, i, j] for k in K) / capacity[i, j] * z[n, i, j] <= link_used_cost_threshold[n],
+                            name="link occupation rate for link (%d, %d) at cost %d" % (i, j, n))
 
     m.addConstr(grb.quicksum(b[k] for k in K) >= assigned_capacity, name="required capacity requirement")
     m.addConstr(grb.quicksum(b[k] for k in K) - grb.quicksum(grb.quicksum((1 - reliability[i, j]) * y[k, i, j] for (i, j) in links) for k in K) >= quality * assigned_capacity,
@@ -123,7 +123,7 @@ def Optimize(assigned_capacity, t):
     # print("elapsed_time for modeling %.5f sec" % (stop - start))
 
     # 最適化を行い，結果を表示させる
-    m.write("mincostflow.lp")  # mincostflow.lp というファイルに定式化されたモデルを出力する
+    # m.write("mincostflow.lp")  # mincostflow.lp というファイルに定式化されたモデルを出力する
 
     m.optimize()
 
@@ -160,11 +160,11 @@ for t in T:
     for (i, j) in links:
         for k in K:
             x[k, i, j] = m.addVar(vtype=grb.GRB.BINARY, name="x_{%d,%d,%d}" % (k, i, j))
-            y[k, i, j] = m.addVar(lb=0.0, vtype=grb.GRB.CONTINUOUS, name="y_{%d,%d,%d}" % (k, i, j))
+            y[k, i, j] = m.addVar(lb=0.0, vtype=grb.GRB.INTEGER, name="y_{%d,%d,%d}" % (k, i, j))
         for n in N:
             z[n, i, j] = m.addVar(vtype=grb.GRB.BINARY, name="z_{%d,%d,%d}" % (n, i, j))
     for k in K:
-        b[k] = m.addVar(lb=0.0, vtype=grb.GRB.CONTINUOUS, name="b_{%d}" % k)
+        b[k] = m.addVar(lb=0.0, vtype=grb.GRB.INTEGER, name="b_{%d}" % k)
 
     m.update()  # モデルに変数が追加されたことを反映させる
 
@@ -190,8 +190,9 @@ for t in T:
         # m.addConstr(0 <= grb.quicksum(y[k, i, j] for k in K) <= min(capacity[i, j], assigned_capacity), name="capacity requirement at (%d, %d)" % (i, j))
         m.addConstr(grb.quicksum(z[n, i, j] for n in N) == 1, name="restrict link used cost func for link (%d, %d)" % (i, j))
         for n in N:
-            m.addConstr(grb.quicksum(y[k, i, j] for k in K) / capacity[i, j] * z[n, i, j] <= link_used_cost_threshold[n] * z[n, i, j],
-                        name="link occupation rate for link (%d, %d) at cost %d" % (i, j, n))
+            if capacity[i, j] != 0:
+                m.addConstr(grb.quicksum(y[k, i, j] for k in K) / capacity[i, j] * z[n, i, j] <= link_used_cost_threshold[n],
+                            name="link occupation rate for link (%d, %d) at cost %d" % (i, j, n))
 
     m.addConstr(grb.quicksum(b[k] for k in K) >= assigned_capacity, name="required capacity requirement")
     m.addConstr(grb.quicksum(b[k] for k in K) - grb.quicksum(grb.quicksum((1 - reliability[i, j]) * y[k, i, j] for (i, j) in links) for k in K) >= quality * assigned_capacity,
@@ -212,10 +213,9 @@ for t in T:
 
     m.optimize()
     if m.getAttr("Status") == grb.GRB.OPTIMAL:
-        print("optimal value:\t%8.4f" % m.ObjVal)
+        # print("optimal value:\t%8.4f" % m.ObjVal)
         f = open("adjust_speed.csv", 'a')
         f.write("%d, %f\n" % (t, m.ObjVal))
-        f.close()
         # for k in K:
         #     for (i, j) in links:
         #         if y[k, i, j].x != 0:
@@ -224,134 +224,169 @@ for t in T:
             minimum_cost = m.ObjVal
             optimal_time = t
             # print("elapsed_time %.5f sec" % (stop - start))
-            # for k in K:
-            #     for (i, j) in links:
-            #         if y[k, i, j].x != 0:
-            #             print("%s:\t%8.4f" % (y[k, i, j].VarName, y[k, i, j].X))
+        for k in K:
+            for (i, j) in links:
+                if y[k, i, j].x != 0:
+                    f.write("%s:\t%8.4f\n" % (y[k, i, j].VarName, y[k, i, j].X))
+        f.write("\n\n")
+        f.close()
 stop = time.time()
 print("minimum cost %.5f time: %d" % (minimum_cost, optimal_time))
 print("elapsed_time %.5f sec" % (stop - start))
+
+
+# 範囲確認
+def doCalcRange(model, delta, min_val, max_val, min_noval_upper, max_noval_lower):
+    # 範囲最小値
+    for t in range(max_noval_lower, min_val, delta):
+        if t not in model:
+            model[t] = grb.Model()
+            model[t] = Optimize(model[t], required_capacity / t, t)
+        if model[t].getAttr("Status") == grb.GRB.OPTIMAL:
+            if t < min_val:
+                min_val = t
+                break
+            if t > max_val:
+                max_val = t
+        else:
+            if max_val < t < min_noval_upper and min_val < t:
+                min_noval_upper = t
+            if max_noval_lower < t < min_val and max_val > t:
+                max_noval_lower = t
+
+    # 範囲最大値
+    for t in range(max_val, min_noval_upper, delta):
+        if t not in model:
+            model[t] = grb.Model()
+            model[t] = Optimize(model[t], required_capacity / t, t)
+        if model[t].getAttr("Status") == grb.GRB.OPTIMAL:
+            if t > max_val:
+                max_val = t
+        else:
+            if max_val < t < min_noval_upper and min_val < t:
+                min_noval_upper = t
+                break
+
+    if delta == 1:
+        return [min_val, max_val]
+    else:
+        return doCalcRange(model, math.ceil(delta / 2), min_val, max_val, min_noval_upper, max_noval_lower)
 
 start = time.time()
 minimum_cost = sys.maxsize
 optimal_time = 0
 start_time = 1
 end_time = required_capacity
-center_time = math.ceil((start_time + end_time) / 2)
-delta = math.ceil((start_time + end_time) / 4)
-shift_direction = 0
-left_val = 0
-center_val = 0
-right_val = 0
-while delta > 0:
-    # 左側
-    if left_val == 0:
-        t = max(center_time - delta, start_time)
-        assigned_capacity = required_capacity / t
-        m = Optimize(assigned_capacity, t)
 
-        if m.getAttr("Status") == grb.GRB.OPTIMAL:
-            print("left t: %d, optimal value:\t%8.4f" % (t, m.ObjVal))
-            f = open("adjust_speed.txt", 'a')
-            f.write("%d %f\n" % (t, m.ObjVal))
-            f.close()
-            left_val = m.ObjVal
-        else:
-            left_val = -1
+model = {}
+delta = math.ceil((end_time - start_time) / 2)
+if delta == 0:
+    delta = 1
+result = doCalcRange(model, delta, end_time + 1, start_time, end_time + 1, start_time)
+print("min %d max %d" % (result[0], result[1]))
 
-    if center_val == 0:
-        t = center_time
-        assigned_capacity = required_capacity / t
-        m = Optimize(assigned_capacity, t)
+start_time_sol = result[0]
+end_time_sol = result[1]
 
-        if m.getAttr("Status") == grb.GRB.OPTIMAL:
-            print("center t: %d, optimal value:\t%8.4f" % (t, m.ObjVal))
-            f = open("adjust_speed.txt", 'a')
-            f.write("%d %f\n" % (t, m.ObjVal))
-            f.close()
-            center_val = m.ObjVal
-        else:
-            center_val = -1
+if start_time_sol > end_time_sol:
+    print("no solution")
+else:
+    center_time = math.ceil((start_time_sol + end_time_sol) / 2)
+    delta = math.ceil((start_time_sol + end_time_sol) / 4)
+    shift_direction = 0
+    left_val = 0
+    center_val = 0
+    right_val = 0
+    while delta > 0:
+        # 左側
+        if left_val == 0:
+            t = max(center_time - delta, start_time_sol)
+            assigned_capacity = required_capacity / t
+            if t not in model:
+                model[t] = grb.Model()
+                model[t] = Optimize(model[t], assigned_capacity, t)
 
-    if right_val == 0:
-        t = min(center_time + delta, end_time)
-        assigned_capacity = required_capacity / t
-        m = Optimize(assigned_capacity, t)
+            if model[t].getAttr("Status") == grb.GRB.OPTIMAL:
+                # print("left t: %d, optimal value:\t%8.4f" % (t, model[t].ObjVal))
+                f = open("adjust_speed_slope.csv", 'a')
+                f.write("%d %f\n" % (t, model[t].ObjVal))
+                f.close()
+                left_val = model[t].ObjVal
+            else:
+                optimal_time = -1
+                break
 
-        if m.getAttr("Status") == grb.GRB.OPTIMAL:
-            print("right t: %d, optimal value:\t%8.4f" % (t, m.ObjVal))
-            f = open("adjust_speed_slope.csv", 'a')
-            f.write("%d %f\n" % (t, m.ObjVal))
-            f.close()
-            right_val = m.ObjVal
-        else:
-            right_val = -1
+        if center_val == 0:
+            t = center_time
+            assigned_capacity = required_capacity / t
+            if t not in model:
+                model[t] = grb.Model()
+                model[t] = Optimize(model[t], assigned_capacity, t)
 
-    if left_val == -1 and center_val != -1 and right_val != -1 or left_val == -1 and center_val == -1 and right_val != -1 or left_val == -1 and center_val == - -1 and right_val == -1:
-        # 左側に解なしが含まれるときはスタート時間を解なし+1に変更
-        if right_val == -1:
-            start_time = min(center_time + delta + 1, end_time)
-        elif center_val == -1:
-            start_time = center_time + 1
-        elif left_val == -1:
-            start_time = max(center_time - delta + 1, start_time + 1)
-        print("start time reset : %d" % start_time)
-        center_time = math.ceil((start_time + end_time) / 2)
-        delta = math.ceil((start_time + end_time) / 4)
-        right_val = 0
-        center_val = 0
-        left_val = 0
-        continue
-    elif left_val != -1 and center_val != -1 and right_val == -1 or left_val != -1 and center_val == -1 and right_val == -1:
-        # 右側に解なしが含まれるときはエンド時間を解なし-1に変更
-        if center_val == -1:
-            end_time = center_time - 1
-        elif right_val == -1:
-            end_time = min(center_time + delta - 1, end_time - 1)
-        print("end time reset : %d" % end_time)
-        center_time = math.ceil((start_time + end_time) / 2)
-        delta = math.ceil((start_time + end_time) / 4)
-        right_val = 0
-        center_val = 0
-        left_val = 0
-        continue
-    elif left_val < center_val < right_val:
-        # 単調増加
-        shift_direction = -1
-    elif left_val > center_val > right_val:
-        # 単調減少
-        shift_direction = 1
-    elif left_val == center_val or center_val == right_val:
-        shift_direction = 0
-    elif left_val > center_val and right_val > center_val:
-        shift_direction = 0
+            if model[t].getAttr("Status") == grb.GRB.OPTIMAL:
+                # print("center t: %d, optimal value:\t%8.4f" % (t, model[t].ObjVal))
+                f = open("adjust_speed_slope.csv", 'a')
+                f.write("%d %f\n" % (t, model[t].ObjVal))
+                f.close()
+                center_val = model[t].ObjVal
+            else:
+                optimal_time = -1
+                break
 
-    if shift_direction == 1:
-        if center_time + delta >= end_time:
-            # 関数全体が単調減少
-            minimum_cost = right_val
-            optimal_time = end_time
-            break
-        center_time = center_time + delta
-        left_val = center_val
-        center_val = right_val
-        right_val = 0
-    elif shift_direction == -1:
-        if center_time - delta <= start_time:
-            # 関数全体が単調増加
-            minimum_cost = left_val
-            optimal_time = start_time
-            break
-        center_time = center_time - delta
-        right_val = center_val
-        center_val = left_val
-        left_val = 0
-    elif shift_direction == 0:
-        left_val = 0
-        right_val = 0
-        delta = math.floor(delta / 2)
-        minimum_cost = center_val
-        optimal_time = center_time
+        if right_val == 0:
+            t = min(center_time + delta, end_time_sol)
+            assigned_capacity = required_capacity / t
+            if t not in model:
+                model[t] = grb.Model()
+                model[t] = Optimize(model[t], assigned_capacity, t)
+
+            if model[t].getAttr("Status") == grb.GRB.OPTIMAL:
+                # print("right t: %d, optimal value:\t%8.4f" % (t, model[t].ObjVal))
+                f = open("adjust_speed_slope.csv", 'a')
+                f.write("%d %f\n" % (t, model[t].ObjVal))
+                f.close()
+                right_val = model[t].ObjVal
+            else:
+                optimal_time = -1
+                break
+
+        if left_val < center_val < right_val:
+            # 単調増加
+            shift_direction = -1
+        elif left_val > center_val > right_val:
+            # 単調減少
+            shift_direction = 1
+        elif left_val == center_val or center_val == right_val:
+            shift_direction = 0
+        elif left_val > center_val and right_val > center_val:
+            shift_direction = 0
+
+        if shift_direction == 1:
+            if center_time + delta >= end_time_sol:
+                # 関数全体が単調減少
+                minimum_cost = right_val
+                optimal_time = end_time_sol
+                break
+            center_time = center_time + delta
+            left_val = center_val
+            center_val = right_val
+            right_val = 0
+        elif shift_direction == -1:
+            if center_time - delta <= start_time_sol:
+                # 関数全体が単調増加
+                minimum_cost = left_val
+                optimal_time = start_time_sol
+                break
+            center_time = center_time - delta
+            right_val = center_val
+            center_val = left_val
+            left_val = 0
+        elif shift_direction == 0:
+            left_val = 0
+            right_val = 0
+            delta = math.floor(delta / 2)
+            minimum_cost = center_val
+            optimal_time = center_time
 
 stop = time.time()
 print("minimum cost %.5f time: %d" % (minimum_cost, optimal_time))
