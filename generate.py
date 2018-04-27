@@ -66,10 +66,11 @@ def get_scale_rand():
     return 10
 
 
-def get_initial_age(scale=0):
-    if scale == 0:
-        scale = get_scale_rand()
-    age = round(scale * numpy.random.weibull(get_shape()))
+def get_initial_age(p_scale=0):
+    if p_scale == 0:
+        p_scale = get_scale_rand()
+    age = rnd.randint(0, round(p_scale * numpy.random.weibull(get_shape())))
+    # age = rnd.randint(0, scale)
     return age
     # return 0
 
