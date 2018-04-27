@@ -4,11 +4,9 @@ import sys
 import numpy
 import pickle
 import copy
-import gurobipy as grb
 import time as tm
 import route_calc_variables
 
-from numba.tests.test_utils import D
 
 from link import Link
 from traffic import Traffic

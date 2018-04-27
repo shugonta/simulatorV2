@@ -69,7 +69,8 @@ def get_scale_rand():
 def get_initial_age(scale=0):
     if scale == 0:
         scale = get_scale_rand()
-    return rnd.randint(0, scale)
+    age = round(scale * numpy.random.weibull(get_shape()))
+    return age
     # return 0
 
 
@@ -128,7 +129,7 @@ def show_links(p_link_list):
     return bandwidth_str
 
 
-TOPOLOGY_FILE = 'topology.txt'
+TOPOLOGY_FILE = 'topology_nsf.txt'
 argv = sys.argv
 
 # 初期設定生成
