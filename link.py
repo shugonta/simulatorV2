@@ -1,5 +1,6 @@
 import math
 import random as rnd
+import sys
 
 
 class Link:
@@ -10,7 +11,7 @@ class Link:
     LOG_FILE4 = "log4.txt"
 
     def __init__(self, distance=0,
-                 bandwidth=0, failure_rate=0.0, failure_status=0, shape=1, scale=1, age=0):
+                 bandwidth=0, failure_rate=0.0, failure_status=0, shape=1, scale=0, age=0):
         """
 
         :param distance: int
@@ -80,40 +81,54 @@ class Link:
         return repaire_probability > random
 
     @classmethod
-    def write_log(cls, msg):
-        # return
-        f = open(cls.LOG_FILE, 'a')
-        f.write(msg)
-        f.close()
+    def write_log(cls,msg):
+        try:
+            f = open(cls.LOG_FILE, 'a')
+            f.write(msg)
+            f.close()
+        except IOError as e:
+            print('except: Cannot open "{0}"'.format(cls.LOG_FILE), file=sys.stderr)
+            print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+            cls.write_log(msg)
 
     @classmethod
-    def write_log2(cls, msg):
-        # return
-        f = open(cls.LOG_FILE2, 'a')
-        f.write(msg)
-        f.close()
+    def write_log2(cls,msg):
+        try:
+            f = open(cls.LOG_FILE2, 'a')
+            f.write(msg)
+            f.close()
+        except IOError as e:
+            print('except: Cannot open "{0}"'.format(cls.LOG_FILE2), file=sys.stderr)
+            print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+            cls.write_log2(msg)
 
     @classmethod
-    def write_log3(cls, msg):
-        # return
-        f = open(cls.LOG_FILE3, 'a')
-        f.write(msg)
-        f.close()
+    def write_log3(cls,msg):
+        try:
+            f = open(cls.LOG_FILE3, 'a')
+            f.write(msg)
+            f.close()
+        except IOError as e:
+            print('except: Cannot open "{0}"'.format(cls.LOG_FILE3), file=sys.stderr)
+            print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+            cls.write_log3(msg)
 
     @classmethod
-    def write_log4(cls, msg):
-        # return
-        f = open(cls.LOG_FILE4, 'a')
-        f.write(msg)
-        f.close()
+    def write_log4(cls,msg):
+        try:
+            f = open(cls.LOG_FILE4, 'a')
+            f.write(msg)
+            f.close()
+        except IOError as e:
+            print('except: Cannot open "{0}"'.format(cls.LOG_FILE4), file=sys.stderr)
+            print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+            cls.write_log4(msg)
 
-    @staticmethod
-    def get_shape():
-        return 5
-
-    @staticmethod
-    def get_scale_rand():
-        return 20
+    def get_scale_rand(self):
+        if self.scale == 0:
+            return  10
+        else:
+            return self.scale
         # i = rnd.randint(0, 2)
         # if i == 0:
         #     return 100
@@ -258,8 +273,8 @@ class Link:
                 else:
                     # リンク故障しているとき
                     if cls.is_repaired(average_repaired_time, link_item.failure_status):
-                        new_shape = cls.get_shape()
-                        new_scale = cls.get_scale_rand()
+                        new_shape = link_item.shape
+                        new_scale = link_item.scale
                         # 復旧(使用帯域幅解放は実行済み)
                         # リンク故障率再設定
                         cls.write_log("[Link repaired] %d->%d\n" % (link_item_key[0], link_item_key[1]))

@@ -25,24 +25,38 @@ CPLEX_SCRIPT = "cplex.txt"
 
 
 def write_log(msg):
-    return
-    f = open(LOG_FILE, 'a')
-    f.write(msg)
-    f.close()
+    try:
+        f = open(LOG_FILE, 'a')
+        f.write(msg)
+        f.close()
+    except IOError as e:
+        print('except: Cannot open "{0}"'.format(LOG_FILE), file=sys.stderr)
+        print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+        write_log(msg)
 
 
 def write_log2(msg):
-    return
-    f = open(LOG_FILE2, 'a')
-    f.write(msg)
-    f.close()
+    # return
+    try:
+        f = open(LOG_FILE2, 'a')
+        f.write(msg)
+        f.close()
+    except IOError as e:
+        print('except: Cannot open "{0}"'.format(LOG_FILE2), file=sys.stderr)
+        print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+        write_log2(msg)
 
 
 def write_log3(msg):
-    return
-    f = open(LOG_FILE3, 'a')
-    f.write(msg)
-    f.close()
+    # return
+    try:
+        f = open(LOG_FILE3, 'a')
+        f.write(msg)
+        f.close()
+    except IOError as e:
+        print('except: Cannot open "{0}"'.format(LOG_FILE3), file=sys.stderr)
+        print('  errno: [{0}] msg: [{1}]'.format(e.errno, e.strerror), file=sys.stderr)
+        write_log3(msg)
 
 
 def is_failure(p_failure_rate):
@@ -99,12 +113,18 @@ def get_failure_rate_rand():
         return 0.01
 
 
-def get_shape():
-    return 5
+def get_shape(p_shape):
+    if p_shape == 0:
+        return 5
+    else:
+        return p_shape
 
 
-def get_scale_rand():
-    return 20
+def get_scale_rand(p_scale):
+    if p_scale == 0:
+        return 10
+    else:
+        return p_scale
     # i = rnd.randint(0, 2)
     # if i == 0:
     #     return 100
@@ -286,8 +306,8 @@ while True:
             else:
                 # リンク故障しているとき
                 if is_repaired(AVERAGE_REPAIRED_TIME, link_item.failure_status):
-                    new_shape = get_shape()
-                    new_scale = get_scale_rand()
+                    new_shape = get_shape(define.shape)
+                    new_scale = get_scale_rand(define.scale)
                     # 復旧(使用帯域幅解放は実行済み)
                     # リンク故障率再設定
                     write_log("[Link repaired] %d->%d\n" % (link_item_key[0], link_item_key[1]))
@@ -319,9 +339,12 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
                     current_link_list[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
                     write_log("Link %d->%d add bandwidth: %d\n" % (
                         used_link_key[0], used_link_key[1], used_link_item.bandwidth))
 
@@ -338,8 +361,9 @@ while True:
             if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.traffic.holding_time:
                 total_data_achieved_demand += 1
             else:
-                write_log("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % ( active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
-                    active_traffic.traffic.bandwidth, active_traffic.traffic.quality, active_traffic.traffic.holding_time, total_bandwidth))
+                write_log("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
+                                                                                        active_traffic.traffic.bandwidth, active_traffic.traffic.quality, active_traffic.traffic.holding_time,
+                                                                                        total_bandwidth))
             active_traffic_list.remove(active_traffic)
     write_log(show_links(current_link_list))
     if len(traffic_list) > 0:
@@ -446,7 +470,7 @@ while True:
                     traffic_item.quality))
                 # ルート使用処理
                 route_cnt = 0
-                active_traffic = ActiveTraffic(time + traffic_item.holding_time, copy.copy(traffic_item), [])
+                active_traffic = ActiveTraffic(time + traffic_item.holding_time, traffic_item.holding_time, copy.copy(traffic_item), [])
                 for route in routes:
                     route_reliability = 1
                     if len(route) > 0:
@@ -483,7 +507,6 @@ while True:
         write_log2("[Total Data(%d)] %d->%d %d\n" % (
             active_traffic_item.traffic.id, active_traffic_item.traffic.start_node, active_traffic_item.traffic.end_node, active_traffic_item.traffic.total_data))
 
-
     # 回線使用終了判定(最小費用)
     for active_traffic in active_traffic_list2[:]:
         if active_traffic.end_time <= time:
@@ -491,10 +514,12 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
-                    current_link_list2[
-                        (used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
+                    current_link_list2[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
                     write_log2("Link %d->%d add bandwidth: %d\n" % (
                         used_link_key[0], used_link_key[1], used_link_item.bandwidth))
 
@@ -620,7 +645,7 @@ while True:
                     traffic_item.quality))
                 # ルート使用処理
                 route_cnt = 0
-                active_traffic = ActiveTraffic(time + traffic_item.holding_time, copy.copy(traffic_item), [])
+                active_traffic = ActiveTraffic(time + traffic_item.holding_time, traffic_item.holding_time, copy.copy(traffic_item), [])
                 for route in routes:
                     route_reliability = 1
                     if len(route) > 0:
@@ -664,10 +689,12 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
-                    current_link_list3[
-                        (used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
+                    current_link_list3[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
                     write_log3("Link %d->%d add bandwidth: %d\n" % (
                         used_link_key[0], used_link_key[1], used_link_item.bandwidth))
 
@@ -800,7 +827,7 @@ while True:
                     traffic_item.quality))
                 # ルート使用処理
                 route_cnt = 0
-                active_traffic = ActiveTraffic(time + traffic_item.holding_time, copy.copy(traffic_item), [])
+                active_traffic = ActiveTraffic(time + traffic_item.holding_time, traffic_item.holding_time, copy.copy(traffic_item), [])
                 for route in routes:
                     route_reliability = 1
                     if len(route) > 0:
@@ -853,9 +880,9 @@ write_log3(
 
 with open(RESULT_FILE, "a") as f:
     f.write("\n")
-    f.write("Condition: Traffic demand: %d, Holding time: %d, Total traffic: %d, Max route: %d, Avg repair time: %d\n"
+    f.write("Condition: Traffic demand: %d, Holding time: %d, Total traffic: %d, Max route: %d, Avg repair time: %d Shape: %d, Scale: %d\n"
             % (define.traffic_demand, define.holding_time, define.total_traffic, define.max_route,
-               define.avg_repaired_time))
+               define.avg_repaired_time, define.shape, define.scale))
     f.write("Propose\n")
     f.write(
         "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\n"

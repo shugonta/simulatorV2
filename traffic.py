@@ -50,7 +50,6 @@ class Traffic:
         for (i, j), link_item in link_list.items():
             if link_item.failure_status == 0:
                 bandwidth_max = max([link_item.bandwidth, bandwidth_max])
-                available_link_list.append((i, j))
                 for k in K:
                     variables.x[k, i, j] = m.addVar(vtype=grb.GRB.BINARY, name="x_{%d,%d,%d}" % (k, i, j))
                     variables.y[k, i, j] = m.addVar(lb=0.0, vtype=grb.GRB.INTEGER, name="y_{%d,%d,%d}" % (k, i, j))
@@ -58,14 +57,13 @@ class Traffic:
                     variables.z[n, i, j] = m.addVar(vtype=grb.GRB.BINARY, name="z_{%d,%d,%d}" % (n, i, j))
         for k in K:
             variables.b[k] = m.addVar(lb=0.0, vtype=grb.GRB.INTEGER, name="b_{%d}" % k)
-        m.update()  # モデルに変数が追加されたことを反映させる
 
         # 目的関数を設定し，最小化を行うことを明示する
         m.setObjective(
             grb.quicksum(grb.quicksum(variables.y[k, i, j] * link_list[i, j].distance * t for (i, j) in available_link_list) for k in K)
-            + grb.quicksum(grb.quicksum(variables.z[n, i, j] * link_used_cost[n] for n in N) for (i, j) in available_link_list),
-            grb.GRB.MINIMIZE)  # 目的関数
-        # m.setAttr("ModelSense", grb.GRB.MINIMIZE)
+            + grb.quicksum(grb.quicksum(variables.z[n, i, j] * link_used_cost[n] for n in N) for (i, j) in available_link_list)
+            , grb.GRB.MINIMIZE)  # 目的関数
+        m.setAttr("ModelSense", grb.GRB.MINIMIZE)
 
         # 制約追加
         for i in nodes:
@@ -81,14 +79,13 @@ class Traffic:
                                 == 0, name="flow reservation at node %d route %d" % (i, k))
 
         for (i, j) in available_link_list:
-            m.addConstr(
-                0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
+            # m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
+            m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, assigned_capacity), name="capacity requirement at (%d, %d)" % (i, j))
             m.addConstr(grb.quicksum(variables.z[n, i, j] for n in N) == 1, name="restrict link used cost func for link (%d, %d)" % (i, j))
             if link_list[i, j].bandwidth != 0:
                 for n in N:
                     m.addConstr(grb.quicksum(variables.y[k, i, j] for k in K) / link_list[i, j].bandwidth * variables.z[n, i, j] <= link_used_cost_threshold[n],
                                 name="link occupation rate for link (%d, %d) at cost %d" % (i, j, n))
-
         m.addConstr(grb.quicksum(variables.b[k] for k in K) >= assigned_capacity, name="required capacity requirement")
         m.addConstr(grb.quicksum(variables.b[k] for k in K) - grb.quicksum(
             grb.quicksum(
@@ -107,6 +104,7 @@ class Traffic:
 
         # 最適化を行い，結果を表示させる
         # m.write("mincostflow.lp")  # mincostflow.lp というファイルに定式化されたモデルを出力する
+        # m.write("mincostflow_%d.lp" % t)  # mincostflow.lp というファイルに定式化されたモデルを出力する
 
         m.optimize()
         solution.setValues(m, variables, t)
@@ -184,11 +182,19 @@ class Traffic:
         :return:
         """
         assigned_capacity = required_total_capacity / t
+        print("assigned_capacity2: %f" % assigned_capacity)
         if t not in solution_list:
             solution_list[t] = Solution()
             self.AdaptiveOptimize(solution_list[t], link_list, available_link_list, assigned_capacity, t, K, p, q, nodes, quality)
 
         if solution_list[t].isOptimized():
+            # for key, val in solution_list[t].variables["y"].items():
+            #     if val != 0:
+            #         print("y%s:\t%8.4f" % (key, val))
+            # for key, val in solution_list[t].variables["z"].items():
+            #     if val != 0:
+            #         print("z%s:\t%8.4f" % (key, val))
+
             print("t: %d, optimal value:\t%8.4f" % (t, solution_list[t].optimal_value))
             return solution_list[t].optimal_value, t
         else:
@@ -265,8 +271,8 @@ class Traffic:
                                     == 0, name="flow reservation at node %d route %d" % (i, k))
 
             for (i, j) in available_link_list:
-                m.addConstr(
-                    0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, required_capacity), name="capacity requirement at (%d, %d)" % (i, j))
+                m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, required_capacity), name="capacity requirement at (%d, %d)" % (i, j))
+                # m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
 
             m.addConstr(grb.quicksum(variables.b[k] for k in K) >= required_capacity, name="required capacity requirement")
             m.addConstr(grb.quicksum(variables.b[k] for k in K) - grb.quicksum(
@@ -403,6 +409,10 @@ class Traffic:
             solution.setValues(m, variables, self.holding_time)
         elif routing_type == RouteCalcType.AdaptableExpectedCapacityGurantee:
             solution_list = {}  # type: dict[int, Solution]
+            for (i, j), link_item in link_list.items():
+                if link_item.failure_status == 0:
+                    bandwidth_max = max([link_item.bandwidth, bandwidth_max])
+                    available_link_list.append((i, j))
             minimum_cost = sys.maxsize
             optimal_time = 0
             start_time = 1
@@ -531,6 +541,7 @@ class Traffic:
                 minimum_val = sys.maxsize
                 # どうにもならないときに線形探索
                 print("Liner Discovery")
+                print("p: %d q: %d required_total_capacity: %d" % (p, q, required_total_capacity))
                 for t in range(start_time_sol, end_time_sol + 1):
                     objVal = self.GetObjVal(solution_list, link_list, available_link_list, required_total_capacity, t, K, p, q, nodes, quality, t, t)
                     if objVal:

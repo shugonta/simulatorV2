@@ -66,12 +66,14 @@ def get_scale_rand():
     return 10
 
 
-def get_initial_age():
-    return rnd.randint(0, get_scale_rand())
+def get_initial_age(scale=0):
+    if scale == 0:
+        scale = get_scale_rand()
+    return rnd.randint(0, scale)
     # return 0
 
 
-def load_topology(p_file_path, p_link_list):
+def load_topology(p_file_path, p_link_list, p_scale=0):
     """
 
     :param p_file_path:
@@ -90,11 +92,13 @@ def load_topology(p_file_path, p_link_list):
     while line:
         data = line[:-1].split(' ')
         if len(data) == 3 and data[0].isdigit() and data[1].isdigit() and data[2].isdigit():
+            if p_scale == 0:
+                p_scale = get_scale_rand()
             p_link_list[(int(data[0]), int(data[1]))] = Link(distance=int(data[2]), bandwidth=100,
                                                              failure_rate=0,
                                                              shape=get_shape(),
-                                                             scale=get_scale_rand(),
-                                                             age=get_initial_age())
+                                                             scale=p_scale,
+                                                             age=get_initial_age(p_scale))
         line = f.readline()
     f.close()
     return (node_count, p_link_list)
@@ -127,25 +131,32 @@ def show_links(p_link_list):
 TOPOLOGY_FILE = 'topology.txt'
 argv = sys.argv
 
-# トポロジー読み込み
-node_size = 0
-link_list = {}
-(node_size, link_list) = load_topology(TOPOLOGY_FILE, link_list)
-
 # 初期設定生成
 # リンク条件生成
 
 if len(argv) > 1:
     print("Traffic per second: %d" % int(argv[1]))
+else:
+    exit(-1)
+
+if len(argv) > 2:
+    scale = int(argv[2])
+    print("Scale: %d" % int(argv[2]))
+else:
+    scale = 0
+
+# トポロジー読み込み
+link_list = {}
+(node_size, link_list) = load_topology(TOPOLOGY_FILE, link_list, scale)
 
 # トラフィック要求発生
 TRAFFIC_DEMAND = int(argv[1])  # 一秒当たりの平均トラフィック発生量
 HOLDING_TIME = 4  # 平均トラフィック保持時間
-TOTAL_TRAFFIC = 1000  # 総トラフィック量
+TOTAL_TRAFFIC = 10000  # 総トラフィック量
 MAX_ROUTE = 3  # 一つの要求に使用される最大ルート数
 AVERAGE_REPAIRED_TIME = 5
 
-define = Define(TRAFFIC_DEMAND, HOLDING_TIME, TOTAL_TRAFFIC, MAX_ROUTE, AVERAGE_REPAIRED_TIME, node_size)
+define = Define(TRAFFIC_DEMAND, HOLDING_TIME, TOTAL_TRAFFIC, MAX_ROUTE, AVERAGE_REPAIRED_TIME, node_size, get_shape(), scale)
 # print(show_links(link_list))
 traffic_list = []
 traffic_count = 0

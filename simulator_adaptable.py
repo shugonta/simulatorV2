@@ -216,9 +216,12 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
                     current_link_list[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
                     write_log("Link %d->%d add bandwidth: %d\n" % (
                         used_link_key[0], used_link_key[1], used_link_item.bandwidth))
 
@@ -232,7 +235,7 @@ while True:
                     active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
                     active_traffic.traffic.bandwidth, active_traffic.traffic.quality, total_bandwidth,
                     active_traffic.end_time))
-            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.traffic.holding_time:
+            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.actual_holding_time:
                 total_data_achieved_demand += 1
             else:
                 write_log("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
@@ -263,11 +266,12 @@ while True:
                     if solution.variables["b"][k] != 0:
                         for (i, j) in current_available_link_list:
                             if solution.variables["y"][(k, i, j)] != 0:
-                                routes[k - 1][(i, j)] = Link(current_link_list[(i, j)].distance, solution.variables["y"][(k, i, j)], current_link_list[(i, j)].failure_rate, 0)
+                                routes[k - 1][(i, j)] = Link(current_link_list[(i, j)].distance, solution.variables["y"][(k, i, j)], current_link_list[(i, j)].failure_rate, 0, define.shape,
+                                                             define.scale)
                 total_requested_expected_bandwidth += traffic_item.bandwidth * traffic_item.quality
-                write_log("[Accepted(%d)] %d->%d (%d, %f)\n" % (
-                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth,
-                    traffic_item.quality))
+                write_log("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
+                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
+                    traffic_item.quality, actual_holding_time))
                 # ルート使用処理
                 route_cnt = 0
                 active_traffic = ActiveTraffic(time + actual_holding_time, actual_holding_time, copy.copy(traffic_item), [])
@@ -280,7 +284,7 @@ while True:
                             route_bandwidth = link.bandwidth
                             current_link_list[(i, j)].bandwidth -= link.bandwidth
                             route_reliability *= current_link_list[(i, j)].calculate_reliability(
-                                traffic_item.holding_time)
+                                actual_holding_time)
                             write_log("Link %d->%d remove bandwidth: %d\n" % (i, j, link.bandwidth))
                         active_traffic.routes.append(route)
                         total_expected_bandwidth += route_reliability * route_bandwidth
@@ -315,10 +319,12 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
-                    current_link_list2[
-                        (used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
+                    current_link_list2[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
                     write_log2("Link %d->%d add bandwidth: %d\n" % (
                         used_link_key[0], used_link_key[1], used_link_item.bandwidth))
 
@@ -337,7 +343,7 @@ while True:
                     active_traffic.traffic.end_node,
                     active_traffic.traffic.bandwidth, active_traffic.traffic.quality, total_bandwidth,
                     active_traffic.end_time))
-            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.traffic.holding_time:
+            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.actual_holding_time:
                 total_data_achieved_demand2 += 1
             else:
                 write_log2("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
@@ -365,7 +371,9 @@ while True:
                             if solution.variables["y"][(k, i, j)] != 0:
                                 routes[k - 1][(i, j)] = Link(current_link_list2[(i, j)].distance, solution.variables["y"][(k, i, j)], current_link_list2[(i, j)].failure_rate, 0)
                 total_requested_expected_bandwidth2 += traffic_item.bandwidth * traffic_item.quality
-                write_log2("[Accepted(%d)] %d->%d (%d, %f)\n" % (traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth, traffic_item.quality))
+                write_log2("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
+                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
+                    traffic_item.quality, actual_holding_time))
                 # ルート使用処理
                 route_cnt = 0
                 active_traffic = ActiveTraffic(time + actual_holding_time, actual_holding_time, copy.copy(traffic_item), [])
@@ -378,7 +386,7 @@ while True:
                             route_bandwidth = link.bandwidth
                             current_link_list2[(i, j)].bandwidth -= link.bandwidth
                             route_reliability *= current_link_list2[(i, j)].calculate_reliability(
-                                traffic_item.holding_time)
+                                actual_holding_time)
                             write_log2("Link %d->%d remove bandwidth: %d\n" % (i, j, link.bandwidth))
                         active_traffic.routes.append(route)
                         total_expected_bandwidth2 += route_reliability * route_bandwidth
@@ -413,10 +421,12 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
-                    current_link_list3[
-                        (used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
+                    current_link_list3[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
                     write_log3("Link %d->%d add bandwidth: %d\n" % (
                         used_link_key[0], used_link_key[1], used_link_item.bandwidth))
 
@@ -433,7 +443,7 @@ while True:
                     active_traffic.traffic.end_node,
                     active_traffic.traffic.bandwidth, active_traffic.traffic.quality, total_bandwidth,
                     active_traffic.end_time))
-            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.traffic.holding_time:
+            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.actual_holding_time:
                 total_data_achieved_demand3 += 1
             else:
                 write_log3("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
@@ -464,9 +474,9 @@ while True:
                                                              current_link_list3[(i, j)].failure_rate,
                                                              0)
                 total_requested_expected_bandwidth3 += traffic_item.bandwidth * traffic_item.quality
-                write_log3("[Accepted(%d)] %d->%d (%d, %f)\n" % (
-                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth,
-                    traffic_item.quality))
+                write_log3("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
+                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
+                    traffic_item.quality, actual_holding_time))
                 # ルート使用処理
                 route_cnt = 0
                 active_traffic = ActiveTraffic(time + actual_holding_time, actual_holding_time, copy.copy(traffic_item), [])
@@ -479,7 +489,7 @@ while True:
                             route_bandwidth = link.bandwidth
                             current_link_list3[(i, j)].bandwidth -= link.bandwidth
                             route_reliability *= current_link_list3[(i, j)].calculate_reliability(
-                                traffic_item.holding_time)
+                                actual_holding_time)
                             write_log3("Link %d->%d remove bandwidth: %d\n" % (i, j, link.bandwidth))
                         active_traffic.routes.append(route)
                         total_expected_bandwidth3 += route_reliability * route_bandwidth
@@ -514,10 +524,16 @@ while True:
             expected_bandwidth = active_traffic.traffic.bandwidth * active_traffic.traffic.quality
             total_bandwidth = 0
             for route in active_traffic.routes:
+                added_total_bandwidth = False
                 for used_link_key, used_link_item in route.items():
+                    if not added_total_bandwidth:
+                        total_bandwidth += used_link_item.bandwidth
+                        added_total_bandwidth = True
                     current_link_list4[(used_link_key[0], used_link_key[1])].bandwidth += used_link_item.bandwidth
-                    total_bandwidth += used_link_item.bandwidth
                     write_log4("Link %d->%d add bandwidth: %d\n" % (used_link_key[0], used_link_key[1], used_link_item.bandwidth))
+
+            bandwidth_lowering = False
+            total_data_failed = False
 
             if total_bandwidth >= expected_bandwidth:
                 request_achieved_demand4 += 1
@@ -527,17 +543,21 @@ while True:
                     active_traffic.traffic.bandwidth, active_traffic.traffic.quality,
                     active_traffic.end_time))
             else:
+                bandwidth_lowering = True
                 write_log4("[End with Bandwidth Lowering(%d)] %d->%d (%d, %f)->%d, %d\n" % (
                     active_traffic.traffic.id, active_traffic.traffic.start_node,
                     active_traffic.traffic.end_node,
                     active_traffic.traffic.bandwidth, active_traffic.traffic.quality, total_bandwidth,
                     active_traffic.end_time))
-            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.traffic.holding_time:
+            if active_traffic.traffic.total_data >= active_traffic.traffic.bandwidth * active_traffic.traffic.quality * active_traffic.actual_holding_time:
                 total_data_achieved_demand4 += 1
             else:
+                total_data_failed = True
                 write_log4("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
                                                                                          active_traffic.traffic.bandwidth, active_traffic.traffic.quality, active_traffic.traffic.holding_time,
                                                                                          total_bandwidth))
+            if not bandwidth_lowering and total_data_failed:
+                print(active_traffic.traffic.id)
             active_traffic_list4.remove(active_traffic)
     write_log4(show_links(current_link_list4))
     if len(traffic_list) > 0:
@@ -563,9 +583,9 @@ while True:
                                                              current_link_list4[(i, j)].failure_rate,
                                                              0)
                 total_requested_expected_bandwidth4 += traffic_item.bandwidth * traffic_item.quality
-                write_log4("[Accepted(%d)] %d->%d (%d, %f)\n" % (
-                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth,
-                    traffic_item.quality))
+                write_log4("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
+                    traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
+                    traffic_item.quality, actual_holding_time))
                 # ルート使用処理
                 route_cnt = 0
                 active_traffic = ActiveTraffic(time + actual_holding_time, actual_holding_time, copy.copy(traffic_item), [])
@@ -578,7 +598,7 @@ while True:
                             route_bandwidth = link.bandwidth
                             current_link_list4[(i, j)].bandwidth -= link.bandwidth
                             route_reliability *= current_link_list4[(i, j)].calculate_reliability(
-                                traffic_item.holding_time)
+                                actual_holding_time)
                             write_log4("Link %d->%d remove bandwidth: %d\n" % (i, j, link.bandwidth))
                         active_traffic.routes.append(route)
                         total_expected_bandwidth4 += route_reliability * route_bandwidth
@@ -627,9 +647,9 @@ write_log4(
 
 with open(RESULT_FILE, "a") as f:
     f.write("\n")
-    f.write("Condition: Traffic demand: %d, Holding time: %d, Total traffic: %d, Max route: %d, Avg repair time: %d\n"
+    f.write("Condition: Traffic demand: %d, Holding time: %d, Total traffic: %d, Max route: %d, Avg repair time: %d Shape: %d, Scale: %d\n"
             % (define.traffic_demand, define.holding_time, define.total_traffic, define.max_route,
-               define.avg_repaired_time))
+               define.avg_repaired_time, define.shape, define.scale))
     f.write("Propose\n")
     f.write(
         "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\n"

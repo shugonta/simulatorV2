@@ -258,3 +258,1363 @@ Bandwidth achieved demand: 425(87%)
 Total expected bandwidth: 5635
 Total requested expected bandwidth: 2871
 Total data achieved demand: 439
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:420(42%)
+Total bandwidth: 7636
+Blocked bandwidth: 3253(42%)
+Bandwidth achieved demand: 543(93%)
+Total expected bandwidth: 4749
+Total requested expected bandwidth: 4383
+Total data achieved demand: 542
+MinCostFlow
+Blocked demand:124(12%)
+Total bandwidth: 7636
+Blocked bandwidth: 1234(16%)
+Bandwidth achieved demand: 652(74%)
+Total expected bandwidth: 6301
+Total requested expected bandwidth: 6402
+Total data achieved demand: 637
+Backup
+Blocked demand:477(47%)
+Total bandwidth: 7636
+Blocked bandwidth: 4610(60%)
+Bandwidth achieved demand: 452(86%)
+Total expected bandwidth: 5972
+Total requested expected bandwidth: 3026
+Total data achieved demand: 482
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:442(44%)
+Total bandwidth: 7636
+Blocked bandwidth: 3339(43%)
+Bandwidth achieved demand: 523(93%)
+Total expected bandwidth: 4666
+Total requested expected bandwidth: 4297
+Total data achieved demand: 522
+MinCostFlow
+Blocked demand:122(12%)
+Total bandwidth: 7636
+Blocked bandwidth: 1276(16%)
+Bandwidth achieved demand: 659(75%)
+Total expected bandwidth: 6234
+Total requested expected bandwidth: 6360
+Total data achieved demand: 647
+Backup
+Blocked demand:489(48%)
+Total bandwidth: 7636
+Blocked bandwidth: 4655(60%)
+Bandwidth achieved demand: 436(85%)
+Total expected bandwidth: 5882
+Total requested expected bandwidth: 2981
+Total data achieved demand: 467
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:394(39%)
+Total bandwidth: 7636
+Blocked bandwidth: 3131(41%)
+Bandwidth achieved demand: 581(95%)
+Total expected bandwidth: 4910
+Total requested expected bandwidth: 4505
+Total data achieved demand: 579
+MinCostFlow
+Blocked demand:135(13%)
+Total bandwidth: 7636
+Blocked bandwidth: 1208(15%)
+Bandwidth achieved demand: 694(80%)
+Total expected bandwidth: 6341
+Total requested expected bandwidth: 6428
+Total data achieved demand: 690
+Backup
+Blocked demand:480(48%)
+Total bandwidth: 7636
+Blocked bandwidth: 4609(60%)
+Bandwidth achieved demand: 455(87%)
+Total expected bandwidth: 5979
+Total requested expected bandwidth: 3027
+Total data achieved demand: 481
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:539(53%)
+Total bandwidth: 6937
+Blocked bandwidth: 3663(52%)
+Bandwidth achieved demand: 428(92%)
+Total expected bandwidth: 3585
+Total requested expected bandwidth: 3274
+Total data achieved demand: 426
+MinCostFlow
+Blocked demand:142(14%)
+Total bandwidth: 6937
+Blocked bandwidth: 1218(17%)
+Bandwidth achieved demand: 581(67%)
+Total expected bandwidth: 5460
+Total requested expected bandwidth: 5719
+Total data achieved demand: 578
+Backup
+Blocked demand:538(53%)
+Total bandwidth: 6937
+Blocked bandwidth: 4399(63%)
+Bandwidth achieved demand: 356(77%)
+Total expected bandwidth: 4828
+Total requested expected bandwidth: 2538
+Total data achieved demand: 390
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:508(50%)
+Total bandwidth: 7311
+Blocked bandwidth: 3674(50%)
+Bandwidth achieved demand: 469(95%)
+Total expected bandwidth: 3886
+Total requested expected bandwidth: 3637
+Total data achieved demand: 470
+MinCostFlow
+Blocked demand:134(13%)
+Total bandwidth: 7311
+Blocked bandwidth: 1111(15%)
+Bandwidth achieved demand: 595(68%)
+Total expected bandwidth: 5895
+Total requested expected bandwidth: 6200
+Total data achieved demand: 593
+Backup
+Blocked demand:501(50%)
+Total bandwidth: 7311
+Blocked bandwidth: 4362(59%)
+Bandwidth achieved demand: 397(79%)
+Total expected bandwidth: 5463
+Total requested expected bandwidth: 2949
+Total data achieved demand: 426
+Adaptable
+Blocked demand:203(20%)
+Total bandwidth: 7311
+Blocked bandwidth: 1719(23%)
+Bandwidth achieved demand: 649(81%)
+Total expected bandwidth: 14210
+Total requested expected bandwidth: 5592
+Total data achieved demand: 614
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3508(35%)
+Total bandwidth: 71763
+Blocked bandwidth: 24915(34%)
+Bandwidth achieved demand: 6132(94%)
+Total expected bandwidth: 50128
+Total requested expected bandwidth: 46848
+Total data achieved demand: 6100
+MinCostFlow
+Blocked demand:100(1%)
+Total bandwidth: 71763
+Blocked bandwidth: 745(1%)
+Bandwidth achieved demand: 7083(71%)
+Total expected bandwidth: 70118
+Total requested expected bandwidth: 71018
+Total data achieved demand: 7078
+Backup
+Blocked demand:1559(15%)
+Total bandwidth: 71763
+Blocked bandwidth: 11300(15%)
+Bandwidth achieved demand: 7203(85%)
+Total expected bandwidth: 119149
+Total requested expected bandwidth: 60463
+Total data achieved demand: 7586
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3546(35%)
+Total bandwidth: 72565
+Blocked bandwidth: 25772(35%)
+Bandwidth achieved demand: 6112(94%)
+Total expected bandwidth: 50067
+Total requested expected bandwidth: 46793
+Total data achieved demand: 6082
+MinCostFlow
+Blocked demand:112(1%)
+Total bandwidth: 72565
+Blocked bandwidth: 843(1%)
+Bandwidth achieved demand: 7192(72%)
+Total expected bandwidth: 70809
+Total requested expected bandwidth: 71722
+Total data achieved demand: 7180
+Backup
+Blocked demand:1861(18%)
+Total bandwidth: 72565
+Blocked bandwidth: 15579(21%)
+Bandwidth achieved demand: 6983(85%)
+Total expected bandwidth: 112207
+Total requested expected bandwidth: 56986
+Total data achieved demand: 7341
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3362(33%)
+Total bandwidth: 72941
+Blocked bandwidth: 24837(34%)
+Bandwidth achieved demand: 6263(94%)
+Total expected bandwidth: 51456
+Total requested expected bandwidth: 48104
+Total data achieved demand: 6270
+MinCostFlow
+Blocked demand:209(2%)
+Total bandwidth: 72941
+Blocked bandwidth: 1738(2%)
+Bandwidth achieved demand: 7138(72%)
+Total expected bandwidth: 70123
+Total requested expected bandwidth: 71203
+Total data achieved demand: 7121
+Backup
+Blocked demand:2772(27%)
+Total bandwidth: 72941
+Blocked bandwidth: 25405(34%)
+Bandwidth achieved demand: 6275(86%)
+Total expected bandwidth: 93546
+Total requested expected bandwidth: 47536
+Total data achieved demand: 6587
+
+Condition: Traffic demand: 20, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3464(34%)
+Total bandwidth: 72233
+Blocked bandwidth: 25721(35%)
+Bandwidth achieved demand: 6070(92%)
+Total expected bandwidth: 49805
+Total requested expected bandwidth: 46512
+Total data achieved demand: 6061
+MinCostFlow
+Blocked demand:402(4%)
+Total bandwidth: 72233
+Blocked bandwidth: 3711(5%)
+Bandwidth achieved demand: 6940(72%)
+Total expected bandwidth: 67451
+Total requested expected bandwidth: 68522
+Total data achieved demand: 6921
+Backup
+Blocked demand:3620(36%)
+Total bandwidth: 72233
+Blocked bandwidth: 33396(46%)
+Bandwidth achieved demand: 5468(85%)
+Total expected bandwidth: 76191
+Total requested expected bandwidth: 38837
+Total data achieved demand: 5750
+
+Condition: Traffic demand: 25, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:4148(41%)
+Total bandwidth: 72163
+Blocked bandwidth: 30861(42%)
+Bandwidth achieved demand: 5544(94%)
+Total expected bandwidth: 44309
+Total requested expected bandwidth: 41302
+Total data achieved demand: 5491
+MinCostFlow
+Blocked demand:715(7%)
+Total bandwidth: 72163
+Blocked bandwidth: 6950(9%)
+Bandwidth achieved demand: 6590(70%)
+Total expected bandwidth: 64115
+Total requested expected bandwidth: 65213
+Total data achieved demand: 6550
+Backup
+Blocked demand:4428(44%)
+Total bandwidth: 72163
+Blocked bandwidth: 40307(55%)
+Bandwidth achieved demand: 4785(85%)
+Total expected bandwidth: 62362
+Total requested expected bandwidth: 31856
+Total data achieved demand: 5029
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:4310(43%)
+Total bandwidth: 71849
+Blocked bandwidth: 31670(44%)
+Bandwidth achieved demand: 5363(94%)
+Total expected bandwidth: 43170
+Total requested expected bandwidth: 40179
+Total data achieved demand: 5335
+MinCostFlow
+Blocked demand:1078(10%)
+Total bandwidth: 71849
+Blocked bandwidth: 10450(14%)
+Bandwidth achieved demand: 6418(71%)
+Total expected bandwidth: 60312
+Total requested expected bandwidth: 61399
+Total data achieved demand: 6354
+Backup
+Blocked demand:4834(48%)
+Total bandwidth: 71849
+Blocked bandwidth: 43412(60%)
+Bandwidth achieved demand: 4436(85%)
+Total expected bandwidth: 55806
+Total requested expected bandwidth: 28437
+Total data achieved demand: 4675
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3326(33%)
+Total bandwidth: 72994
+Blocked bandwidth: 24252(33%)
+Bandwidth achieved demand: 6291(94%)
+Total expected bandwidth: 52123
+Total requested expected bandwidth: 48742
+Total data achieved demand: 6279
+MinCostFlow
+Blocked demand:84(0%)
+Total bandwidth: 72994
+Blocked bandwidth: 590(0%)
+Bandwidth achieved demand: 7150(72%)
+Total expected bandwidth: 71508
+Total requested expected bandwidth: 72404
+Total data achieved demand: 7141
+Backup
+Blocked demand:1490(14%)
+Total bandwidth: 72994
+Blocked bandwidth: 11216(15%)
+Bandwidth achieved demand: 7304(85%)
+Total expected bandwidth: 121797
+Total requested expected bandwidth: 61778
+Total data achieved demand: 7695
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3353(33%)
+Total bandwidth: 72686
+Blocked bandwidth: 24137(33%)
+Bandwidth achieved demand: 6230(93%)
+Total expected bandwidth: 51921
+Total requested expected bandwidth: 48549
+Total data achieved demand: 6238
+MinCostFlow
+Blocked demand:97(0%)
+Total bandwidth: 72686
+Blocked bandwidth: 757(1%)
+Bandwidth achieved demand: 7079(71%)
+Total expected bandwidth: 70924
+Total requested expected bandwidth: 71929
+Total data achieved demand: 7074
+Backup
+Blocked demand:1856(18%)
+Total bandwidth: 72686
+Blocked bandwidth: 15211(20%)
+Bandwidth achieved demand: 6918(84%)
+Total expected bandwidth: 113011
+Total requested expected bandwidth: 57475
+Total data achieved demand: 7347
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3320(33%)
+Total bandwidth: 72226
+Blocked bandwidth: 23980(33%)
+Bandwidth achieved demand: 6281(94%)
+Total expected bandwidth: 51668
+Total requested expected bandwidth: 48246
+Total data achieved demand: 6263
+MinCostFlow
+Blocked demand:211(2%)
+Total bandwidth: 72226
+Blocked bandwidth: 1914(2%)
+Bandwidth achieved demand: 7099(72%)
+Total expected bandwidth: 69241
+Total requested expected bandwidth: 70312
+Total data achieved demand: 7080
+Backup
+Blocked demand:2733(27%)
+Total bandwidth: 72226
+Blocked bandwidth: 23998(33%)
+Bandwidth achieved demand: 6252(86%)
+Total expected bandwidth: 94832
+Total requested expected bandwidth: 48228
+Total data achieved demand: 6571
+
+Condition: Traffic demand: 20, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3729(37%)
+Total bandwidth: 72545
+Blocked bandwidth: 27617(38%)
+Bandwidth achieved demand: 5931(94%)
+Total expected bandwidth: 48121
+Total requested expected bandwidth: 44928
+Total data achieved demand: 5902
+MinCostFlow
+Blocked demand:463(4%)
+Total bandwidth: 72545
+Blocked bandwidth: 4562(6%)
+Bandwidth achieved demand: 7014(73%)
+Total expected bandwidth: 66892
+Total requested expected bandwidth: 67983
+Total data achieved demand: 6973
+Backup
+Blocked demand:3700(37%)
+Total bandwidth: 72545
+Blocked bandwidth: 33365(45%)
+Bandwidth achieved demand: 5433(86%)
+Total expected bandwidth: 76717
+Total requested expected bandwidth: 39180
+Total data achieved demand: 5700
+
+Condition: Traffic demand: 25, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:3856(38%)
+Total bandwidth: 73269
+Blocked bandwidth: 28560(38%)
+Bandwidth achieved demand: 5734(93%)
+Total expected bandwidth: 47802
+Total requested expected bandwidth: 44709
+Total data achieved demand: 5701
+MinCostFlow
+Blocked demand:675(6%)
+Total bandwidth: 73269
+Blocked bandwidth: 6377(8%)
+Bandwidth achieved demand: 6738(72%)
+Total expected bandwidth: 65872
+Total requested expected bandwidth: 66892
+Total data achieved demand: 6700
+Backup
+Blocked demand:4208(42%)
+Total bandwidth: 73269
+Blocked bandwidth: 38557(52%)
+Bandwidth achieved demand: 4979(85%)
+Total expected bandwidth: 68029
+Total requested expected bandwidth: 34712
+Total data achieved demand: 5229
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:4252(42%)
+Total bandwidth: 72064
+Blocked bandwidth: 31536(43%)
+Bandwidth achieved demand: 5446(94%)
+Total expected bandwidth: 43485
+Total requested expected bandwidth: 40528
+Total data achieved demand: 5424
+MinCostFlow
+Blocked demand:1225(12%)
+Total bandwidth: 72064
+Blocked bandwidth: 11604(16%)
+Bandwidth achieved demand: 6391(72%)
+Total expected bandwidth: 59238
+Total requested expected bandwidth: 60460
+Total data achieved demand: 6319
+Backup
+Blocked demand:4870(48%)
+Total bandwidth: 72064
+Blocked bandwidth: 43330(60%)
+Bandwidth achieved demand: 4460(86%)
+Total expected bandwidth: 56111
+Total requested expected bandwidth: 28734
+Total data achieved demand: 4673
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:6897(68%)
+Total bandwidth: 71914
+Blocked bandwidth: 49394(68%)
+Bandwidth achieved demand: 2938(94%)
+Total expected bandwidth: 23975
+Total requested expected bandwidth: 22520
+Total data achieved demand: 2920
+MinCostFlow
+Blocked demand:467(4%)
+Total bandwidth: 71914
+Blocked bandwidth: 3151(4%)
+Bandwidth achieved demand: 4944(51%)
+Total expected bandwidth: 61689
+Total requested expected bandwidth: 68763
+Total data achieved demand: 4937
+Backup
+Blocked demand:3330(33%)
+Total bandwidth: 71914
+Blocked bandwidth: 23889(33%)
+Bandwidth achieved demand: 4377(65%)
+Total expected bandwidth: 85094
+Total requested expected bandwidth: 48025
+Total data achieved demand: 4917
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:6780(67%)
+Total bandwidth: 71865
+Blocked bandwidth: 49177(68%)
+Bandwidth achieved demand: 3064(95%)
+Total expected bandwidth: 24187
+Total requested expected bandwidth: 22688
+Total data achieved demand: 3036
+MinCostFlow
+Blocked demand:409(4%)
+Total bandwidth: 71865
+Blocked bandwidth: 3132(4%)
+Bandwidth achieved demand: 5058(52%)
+Total expected bandwidth: 61327
+Total requested expected bandwidth: 68733
+Total data achieved demand: 5053
+Backup
+Blocked demand:3478(34%)
+Total bandwidth: 71865
+Blocked bandwidth: 26011(36%)
+Bandwidth achieved demand: 4409(67%)
+Total expected bandwidth: 81055
+Total requested expected bandwidth: 45854
+Total data achieved demand: 4881
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:6832(68%)
+Total bandwidth: 72967
+Blocked bandwidth: 50052(68%)
+Bandwidth achieved demand: 2972(93%)
+Total expected bandwidth: 24404
+Total requested expected bandwidth: 22915
+Total data achieved demand: 2974
+MinCostFlow
+Blocked demand:682(6%)
+Total bandwidth: 72967
+Blocked bandwidth: 5839(8%)
+Bandwidth achieved demand: 4857(52%)
+Total expected bandwidth: 60169
+Total requested expected bandwidth: 67128
+Total data achieved demand: 4844
+Backup
+Blocked demand:4165(41%)
+Total bandwidth: 72967
+Blocked bandwidth: 33075(45%)
+Bandwidth achieved demand: 3979(68%)
+Total expected bandwidth: 70793
+Total requested expected bandwidth: 39892
+Total data achieved demand: 4412
+
+Condition: Traffic demand: 20, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:6645(66%)
+Total bandwidth: 72022
+Blocked bandwidth: 47687(66%)
+Bandwidth achieved demand: 3177(94%)
+Total expected bandwidth: 25847
+Total requested expected bandwidth: 24335
+Total data achieved demand: 3130
+MinCostFlow
+Blocked demand:687(6%)
+Total bandwidth: 72022
+Blocked bandwidth: 6268(8%)
+Bandwidth achieved demand: 4928(52%)
+Total expected bandwidth: 59023
+Total requested expected bandwidth: 65754
+Total data achieved demand: 4905
+Backup
+Blocked demand:4341(43%)
+Total bandwidth: 72022
+Blocked bandwidth: 35658(49%)
+Bandwidth achieved demand: 3865(68%)
+Total expected bandwidth: 64621
+Total requested expected bandwidth: 36364
+Total data achieved demand: 4262
+
+Condition: Traffic demand: 25, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:6717(67%)
+Total bandwidth: 72700
+Blocked bandwidth: 48790(67%)
+Bandwidth achieved demand: 3124(95%)
+Total expected bandwidth: 25408
+Total requested expected bandwidth: 23910
+Total data achieved demand: 3087
+MinCostFlow
+Blocked demand:1014(10%)
+Total bandwidth: 72700
+Blocked bandwidth: 9466(13%)
+Bandwidth achieved demand: 4765(53%)
+Total expected bandwidth: 56242
+Total requested expected bandwidth: 63234
+Total data achieved demand: 4725
+Backup
+Blocked demand:4838(48%)
+Total bandwidth: 72700
+Blocked bandwidth: 40767(56%)
+Bandwidth achieved demand: 3510(67%)
+Total expected bandwidth: 56085
+Total requested expected bandwidth: 31933
+Total data achieved demand: 3909
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5
+Propose
+Blocked demand:6946(69%)
+Total bandwidth: 71575
+Blocked bandwidth: 49661(69%)
+Bandwidth achieved demand: 2909(95%)
+Total expected bandwidth: 23273
+Total requested expected bandwidth: 21914
+Total data achieved demand: 2870
+MinCostFlow
+Blocked demand:1380(13%)
+Total bandwidth: 71575
+Blocked bandwidth: 13006(18%)
+Bandwidth achieved demand: 4513(52%)
+Total expected bandwidth: 52345
+Total requested expected bandwidth: 58569
+Total data achieved demand: 4480
+Backup
+Blocked demand:5496(54%)
+Total bandwidth: 71575
+Blocked bandwidth: 44485(62%)
+Bandwidth achieved demand: 3077(68%)
+Total expected bandwidth: 47589
+Total requested expected bandwidth: 27090
+Total data achieved demand: 3393
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:679(67%)
+Total bandwidth: 6997
+Blocked bandwidth: 4674(66%)
+Bandwidth achieved demand: 300(93%)
+Total expected bandwidth: 2463
+Total requested expected bandwidth: 2323
+Total data achieved demand: 297
+MinCostFlow
+Blocked demand:47(4%)
+Total bandwidth: 6997
+Blocked bandwidth: 364(5%)
+Bandwidth achieved demand: 507(53%)
+Total expected bandwidth: 5913
+Total requested expected bandwidth: 6633
+Total data achieved demand: 506
+Backup
+Blocked demand:380(38%)
+Total bandwidth: 6997
+Blocked bandwidth: 2738(39%)
+Bandwidth achieved demand: 435(70%)
+Total expected bandwidth: 7580
+Total requested expected bandwidth: 4259
+Total data achieved demand: 476
+Adaptable
+Blocked demand:58(5%)
+Total bandwidth: 6997
+Blocked bandwidth: 468(6%)
+Bandwidth achieved demand: 491(52%)
+Total expected bandwidth: 6897
+Total requested expected bandwidth: 6529
+Total data achieved demand: 557
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:310(31%)
+Total bandwidth: 6997
+Blocked bandwidth: 2412(34%)
+Bandwidth achieved demand: 498(72%)
+Total expected bandwidth: 5037
+Total requested expected bandwidth: 4585
+Total data achieved demand: 588
+MinCostFlow
+Blocked demand:43(4%)
+Total bandwidth: 6997
+Blocked bandwidth: 405(5%)
+Bandwidth achieved demand: 486(50%)
+Total expected bandwidth: 5818
+Total requested expected bandwidth: 6592
+Total data achieved demand: 484
+Backup
+Blocked demand:377(37%)
+Total bandwidth: 6997
+Blocked bandwidth: 2822(40%)
+Bandwidth achieved demand: 400(64%)
+Total expected bandwidth: 7197
+Total requested expected bandwidth: 4175
+Total data achieved demand: 438
+Adaptable
+Blocked demand:46(4%)
+Total bandwidth: 6997
+Blocked bandwidth: 437(6%)
+Bandwidth achieved demand: 442(46%)
+Total expected bandwidth: 8735
+Total requested expected bandwidth: 6560
+Total data achieved demand: 480
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:694(69%)
+Total bandwidth: 6997
+Blocked bandwidth: 4780(68%)
+Bandwidth achieved demand: 287(93%)
+Total expected bandwidth: 2366
+Total requested expected bandwidth: 2217
+Total data achieved demand: 287
+MinCostFlow
+Blocked demand:61(6%)
+Total bandwidth: 6997
+Blocked bandwidth: 445(6%)
+Bandwidth achieved demand: 511(54%)
+Total expected bandwidth: 5821
+Total requested expected bandwidth: 6552
+Total data achieved demand: 511
+Backup
+Blocked demand:406(40%)
+Total bandwidth: 6997
+Blocked bandwidth: 3114(44%)
+Bandwidth achieved demand: 399(67%)
+Total expected bandwidth: 6862
+Total requested expected bandwidth: 3883
+Total data achieved demand: 447
+Adaptable
+Blocked demand:364(36%)
+Total bandwidth: 6997
+Blocked bandwidth: 2654(37%)
+Bandwidth achieved demand: 456(71%)
+Total expected bandwidth: 7341
+Total requested expected bandwidth: 4343
+Total data achieved demand: 472
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:674(67%)
+Total bandwidth: 7159
+Blocked bandwidth: 4748(66%)
+Bandwidth achieved demand: 317(97%)
+Total expected bandwidth: 2547
+Total requested expected bandwidth: 2411
+Total data achieved demand: 308
+MinCostFlow
+Blocked demand:35(3%)
+Total bandwidth: 7159
+Blocked bandwidth: 253(3%)
+Bandwidth achieved demand: 479(49%)
+Total expected bandwidth: 6120
+Total requested expected bandwidth: 6906
+Total data achieved demand: 478
+Backup
+Blocked demand:306(30%)
+Total bandwidth: 7159
+Blocked bandwidth: 2281(31%)
+Bandwidth achieved demand: 443(63%)
+Total expected bandwidth: 8625
+Total requested expected bandwidth: 4878
+Total data achieved demand: 491
+Adaptable
+Blocked demand:304(30%)
+Total bandwidth: 7159
+Blocked bandwidth: 2249(31%)
+Bandwidth achieved demand: 489(70%)
+Total expected bandwidth: 8613
+Total requested expected bandwidth: 4910
+Total data achieved demand: 516
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:666(66%)
+Total bandwidth: 7271
+Blocked bandwidth: 4773(65%)
+Bandwidth achieved demand: 321(96%)
+Total expected bandwidth: 2654
+Total requested expected bandwidth: 2498
+Total data achieved demand: 318
+MinCostFlow
+Blocked demand:45(4%)
+Total bandwidth: 7271
+Blocked bandwidth: 387(5%)
+Bandwidth achieved demand: 501(52%)
+Total expected bandwidth: 6066
+Total requested expected bandwidth: 6884
+Total data achieved demand: 497
+Backup
+Blocked demand:350(35%)
+Total bandwidth: 7271
+Blocked bandwidth: 2625(36%)
+Bandwidth achieved demand: 457(70%)
+Total expected bandwidth: 8245
+Total requested expected bandwidth: 4646
+Total data achieved demand: 499
+Adaptable
+Blocked demand:314(31%)
+Total bandwidth: 7271
+Blocked bandwidth: 2198(30%)
+Bandwidth achieved demand: 474(69%)
+Total expected bandwidth: 8486
+Total requested expected bandwidth: 5073
+Total data achieved demand: 502
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:646(64%)
+Total bandwidth: 6898
+Blocked bandwidth: 4294(62%)
+Bandwidth achieved demand: 327(92%)
+Total expected bandwidth: 2774
+Total requested expected bandwidth: 2604
+Total data achieved demand: 323
+MinCostFlow
+Blocked demand:40(4%)
+Total bandwidth: 6898
+Blocked bandwidth: 329(4%)
+Bandwidth achieved demand: 492(51%)
+Total expected bandwidth: 5876
+Total requested expected bandwidth: 6569
+Total data achieved demand: 491
+Backup
+Blocked demand:341(34%)
+Total bandwidth: 6898
+Blocked bandwidth: 2532(36%)
+Bandwidth achieved demand: 428(64%)
+Total expected bandwidth: 7807
+Total requested expected bandwidth: 4366
+Total data achieved demand: 485
+Adaptable
+Blocked demand:287(28%)
+Total bandwidth: 6898
+Blocked bandwidth: 1973(28%)
+Bandwidth achieved demand: 489(68%)
+Total expected bandwidth: 8356
+Total requested expected bandwidth: 4925
+Total data achieved demand: 524
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:669(66%)
+Total bandwidth: 7290
+Blocked bandwidth: 4923(67%)
+Bandwidth achieved demand: 310(93%)
+Total expected bandwidth: 2511
+Total requested expected bandwidth: 2367
+Total data achieved demand: 316
+MinCostFlow
+Blocked demand:35(3%)
+Total bandwidth: 7290
+Blocked bandwidth: 232(3%)
+Bandwidth achieved demand: 530(54%)
+Total expected bandwidth: 6203
+Total requested expected bandwidth: 7058
+Total data achieved demand: 530
+Backup
+Blocked demand:327(32%)
+Total bandwidth: 7290
+Blocked bandwidth: 2389(32%)
+Bandwidth achieved demand: 459(68%)
+Total expected bandwidth: 8471
+Total requested expected bandwidth: 4901
+Total data achieved demand: 510
+Adaptable
+Blocked demand:326(32%)
+Total bandwidth: 7290
+Blocked bandwidth: 2381(32%)
+Bandwidth achieved demand: 496(73%)
+Total expected bandwidth: 8840
+Total requested expected bandwidth: 4909
+Total data achieved demand: 526
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:689(68%)
+Total bandwidth: 7272
+Blocked bandwidth: 4784(65%)
+Bandwidth achieved demand: 287(92%)
+Total expected bandwidth: 2621
+Total requested expected bandwidth: 2488
+Total data achieved demand: 293
+MinCostFlow
+Blocked demand:30(3%)
+Total bandwidth: 7272
+Blocked bandwidth: 224(3%)
+Bandwidth achieved demand: 523(53%)
+Total expected bandwidth: 6306
+Total requested expected bandwidth: 7048
+Total data achieved demand: 523
+Backup
+Blocked demand:334(33%)
+Total bandwidth: 7272
+Blocked bandwidth: 2451(33%)
+Bandwidth achieved demand: 458(68%)
+Total expected bandwidth: 8380
+Total requested expected bandwidth: 4821
+Total data achieved demand: 512
+Adaptable
+Blocked demand:286(28%)
+Total bandwidth: 7272
+Blocked bandwidth: 1863(25%)
+Bandwidth achieved demand: 491(68%)
+Total expected bandwidth: 8959
+Total requested expected bandwidth: 5409
+Total data achieved demand: 520
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:665(66%)
+Total bandwidth: 7420
+Blocked bandwidth: 4949(66%)
+Bandwidth achieved demand: 305(91%)
+Total expected bandwidth: 2627
+Total requested expected bandwidth: 2471
+Total data achieved demand: 309
+MinCostFlow
+Blocked demand:55(5%)
+Total bandwidth: 7420
+Blocked bandwidth: 464(6%)
+Bandwidth achieved demand: 524(55%)
+Total expected bandwidth: 6234
+Total requested expected bandwidth: 6956
+Total data achieved demand: 524
+Backup
+Blocked demand:390(39%)
+Total bandwidth: 7420
+Blocked bandwidth: 3092(41%)
+Bandwidth achieved demand: 421(69%)
+Total expected bandwidth: 7689
+Total requested expected bandwidth: 4328
+Total data achieved demand: 460
+Adaptable
+Blocked demand:346(34%)
+Total bandwidth: 7420
+Blocked bandwidth: 2627(35%)
+Bandwidth achieved demand: 430(65%)
+Total expected bandwidth: 7703
+Total requested expected bandwidth: 4793
+Total data achieved demand: 459
+
+Condition: Traffic demand: 20, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:655(65%)
+Total bandwidth: 7437
+Blocked bandwidth: 4905(65%)
+Bandwidth achieved demand: 324(93%)
+Total expected bandwidth: 2701
+Total requested expected bandwidth: 2532
+Total data achieved demand: 331
+MinCostFlow
+Blocked demand:79(7%)
+Total bandwidth: 7437
+Blocked bandwidth: 773(10%)
+Bandwidth achieved demand: 500(54%)
+Total expected bandwidth: 5797
+Total requested expected bandwidth: 6664
+Total data achieved demand: 500
+Backup
+Blocked demand:432(43%)
+Total bandwidth: 7437
+Blocked bandwidth: 3650(49%)
+Bandwidth achieved demand: 389(68%)
+Total expected bandwidth: 6376
+Total requested expected bandwidth: 3787
+Total data achieved demand: 422
+Adaptable
+Blocked demand:326(32%)
+Total bandwidth: 7437
+Blocked bandwidth: 2440(32%)
+Bandwidth achieved demand: 432(64%)
+Total expected bandwidth: 7920
+Total requested expected bandwidth: 4997
+Total data achieved demand: 468
+
+Condition: Traffic demand: 25, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:649(64%)
+Total bandwidth: 7173
+Blocked bandwidth: 4674(65%)
+Bandwidth achieved demand: 310(88%)
+Total expected bandwidth: 2663
+Total requested expected bandwidth: 2499
+Total data achieved demand: 323
+MinCostFlow
+Blocked demand:105(10%)
+Total bandwidth: 7173
+Blocked bandwidth: 796(11%)
+Bandwidth achieved demand: 477(53%)
+Total expected bandwidth: 5454
+Total requested expected bandwidth: 6377
+Total data achieved demand: 477
+Backup
+Blocked demand:487(48%)
+Total bandwidth: 7173
+Blocked bandwidth: 3774(52%)
+Bandwidth achieved demand: 351(68%)
+Total expected bandwidth: 5737
+Total requested expected bandwidth: 3399
+Total data achieved demand: 390
+Adaptable
+Blocked demand:348(34%)
+Total bandwidth: 7173
+Blocked bandwidth: 2320(32%)
+Bandwidth achieved demand: 394(60%)
+Total expected bandwidth: 7059
+Total requested expected bandwidth: 4853
+Total data achieved demand: 420
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:742(74%)
+Total bandwidth: 7527
+Blocked bandwidth: 5541(73%)
+Bandwidth achieved demand: 241(93%)
+Total expected bandwidth: 2102
+Total requested expected bandwidth: 1986
+Total data achieved demand: 245
+MinCostFlow
+Blocked demand:181(18%)
+Total bandwidth: 7527
+Blocked bandwidth: 1588(21%)
+Bandwidth achieved demand: 422(51%)
+Total expected bandwidth: 5063
+Total requested expected bandwidth: 5939
+Total data achieved demand: 422
+Backup
+Blocked demand:595(59%)
+Total bandwidth: 7527
+Blocked bandwidth: 4828(64%)
+Bandwidth achieved demand: 276(68%)
+Total expected bandwidth: 4528
+Total requested expected bandwidth: 2699
+Total data achieved demand: 309
+Adaptable
+Blocked demand:459(45%)
+Total bandwidth: 7527
+Blocked bandwidth: 3417(45%)
+Bandwidth achieved demand: 302(55%)
+Total expected bandwidth: 5920
+Total requested expected bandwidth: 4110
+Total data achieved demand: 328
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 1000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:368(36%)
+Total bandwidth: 7115
+Blocked bandwidth: 2956(41%)
+Bandwidth achieved demand: 471(74%)
+Total expected bandwidth: 4612
+Total requested expected bandwidth: 4159
+Total data achieved demand: 552
+MinCostFlow
+Blocked demand:86(8%)
+Total bandwidth: 7115
+Blocked bandwidth: 674(9%)
+Bandwidth achieved demand: 460(50%)
+Total expected bandwidth: 5669
+Total requested expected bandwidth: 6441
+Total data achieved demand: 460
+Backup
+Blocked demand:426(42%)
+Total bandwidth: 7115
+Blocked bandwidth: 3283(46%)
+Bandwidth achieved demand: 367(63%)
+Total expected bandwidth: 6679
+Total requested expected bandwidth: 3832
+Total data achieved demand: 425
+Adaptable
+Blocked demand:114(11%)
+Total bandwidth: 7115
+Blocked bandwidth: 950(13%)
+Bandwidth achieved demand: 388(43%)
+Total expected bandwidth: 7925
+Total requested expected bandwidth: 6165
+Total data achieved demand: 439
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6752(67%)
+Total bandwidth: 73483
+Blocked bandwidth: 49351(67%)
+Bandwidth achieved demand: 2948(90%)
+Total expected bandwidth: 25630
+Total requested expected bandwidth: 24132
+Total data achieved demand: 3050
+MinCostFlow
+Blocked demand:460(4%)
+Total bandwidth: 73483
+Blocked bandwidth: 3364(4%)
+Bandwidth achieved demand: 4941(51%)
+Total expected bandwidth: 62587
+Total requested expected bandwidth: 70119
+Total data achieved demand: 4941
+Backup
+Blocked demand:3240(32%)
+Total bandwidth: 73483
+Blocked bandwidth: 23573(32%)
+Bandwidth achieved demand: 4453(65%)
+Total expected bandwidth: 88167
+Total requested expected bandwidth: 49910
+Total data achieved demand: 5032
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6720(67%)
+Total bandwidth: 72819
+Blocked bandwidth: 48900(67%)
+Bandwidth achieved demand: 3009(91%)
+Total expected bandwidth: 25399
+Total requested expected bandwidth: 23919
+Total data achieved demand: 3102
+MinCostFlow
+Blocked demand:477(4%)
+Total bandwidth: 72819
+Blocked bandwidth: 3661(5%)
+Bandwidth achieved demand: 4902(51%)
+Total expected bandwidth: 62031
+Total requested expected bandwidth: 69158
+Total data achieved demand: 4902
+Backup
+Blocked demand:3451(34%)
+Total bandwidth: 72819
+Blocked bandwidth: 25755(35%)
+Bandwidth achieved demand: 4358(66%)
+Total expected bandwidth: 83462
+Total requested expected bandwidth: 47064
+Total data achieved demand: 4862
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6887(68%)
+Total bandwidth: 72402
+Blocked bandwidth: 49571(68%)
+Bandwidth achieved demand: 2848(91%)
+Total expected bandwidth: 24309
+Total requested expected bandwidth: 22831
+Total data achieved demand: 2929
+MinCostFlow
+Blocked demand:661(6%)
+Total bandwidth: 72402
+Blocked bandwidth: 5202(7%)
+Bandwidth achieved demand: 4909(52%)
+Total expected bandwidth: 60062
+Total requested expected bandwidth: 67200
+Total data achieved demand: 4909
+Backup
+Blocked demand:4075(40%)
+Total bandwidth: 72402
+Blocked bandwidth: 31806(43%)
+Bandwidth achieved demand: 3916(66%)
+Total expected bandwidth: 71722
+Total requested expected bandwidth: 40596
+Total data achieved demand: 4389
+
+Condition: Traffic demand: 20, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6795(67%)
+Total bandwidth: 72008
+Blocked bandwidth: 48798(67%)
+Bandwidth achieved demand: 2913(90%)
+Total expected bandwidth: 24691
+Total requested expected bandwidth: 23210
+Total data achieved demand: 2998
+MinCostFlow
+Blocked demand:721(7%)
+Total bandwidth: 72008
+Blocked bandwidth: 6586(9%)
+Bandwidth achieved demand: 4789(51%)
+Total expected bandwidth: 58326
+Total requested expected bandwidth: 65422
+Total data achieved demand: 4789
+Backup
+Blocked demand:4509(45%)
+Total bandwidth: 72008
+Blocked bandwidth: 36854(51%)
+Bandwidth achieved demand: 3587(65%)
+Total expected bandwidth: 61420
+Total requested expected bandwidth: 35154
+Total data achieved demand: 4034
+
+Condition: Traffic demand: 25, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6849(68%)
+Total bandwidth: 72278
+Blocked bandwidth: 49561(68%)
+Bandwidth achieved demand: 2845(90%)
+Total expected bandwidth: 24215
+Total requested expected bandwidth: 22717
+Total data achieved demand: 2929
+MinCostFlow
+Blocked demand:1134(11%)
+Total bandwidth: 72278
+Blocked bandwidth: 10425(14%)
+Bandwidth achieved demand: 4614(52%)
+Total expected bandwidth: 55332
+Total requested expected bandwidth: 61853
+Total data achieved demand: 4614
+Backup
+Blocked demand:5151(51%)
+Total bandwidth: 72278
+Blocked bandwidth: 42278(58%)
+Bandwidth achieved demand: 3232(66%)
+Total expected bandwidth: 53402
+Total requested expected bandwidth: 30000
+Total data achieved demand: 3643
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6755(67%)
+Total bandwidth: 72501
+Blocked bandwidth: 49172(67%)
+Bandwidth achieved demand: 2984(91%)
+Total expected bandwidth: 24893
+Total requested expected bandwidth: 23329
+Total data achieved demand: 3075
+MinCostFlow
+Blocked demand:1560(15%)
+Total bandwidth: 72501
+Blocked bandwidth: 14516(20%)
+Bandwidth achieved demand: 4465(52%)
+Total expected bandwidth: 51605
+Total requested expected bandwidth: 57985
+Total data achieved demand: 4465
+Backup
+Blocked demand:5451(54%)
+Total bandwidth: 72501
+Blocked bandwidth: 45804(63%)
+Bandwidth achieved demand: 3080(67%)
+Total expected bandwidth: 46528
+Total requested expected bandwidth: 26697
+Total data achieved demand: 3448
+
+Condition: Traffic demand: 5, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6855(68%)
+Total bandwidth: 74149
+Blocked bandwidth: 50735(68%)
+Bandwidth achieved demand: 2907(92%)
+Total expected bandwidth: 24872
+Total requested expected bandwidth: 23414
+Total data achieved demand: 2976
+MinCostFlow
+Blocked demand:421(4%)
+Total bandwidth: 74149
+Blocked bandwidth: 3018(4%)
+Bandwidth achieved demand: 4985(52%)
+Total expected bandwidth: 64156
+Total requested expected bandwidth: 71131
+Total data achieved demand: 4985
+Backup
+Blocked demand:3311(33%)
+Total bandwidth: 74149
+Blocked bandwidth: 24241(32%)
+Bandwidth achieved demand: 4452(66%)
+Total expected bandwidth: 89264
+Total requested expected bandwidth: 49908
+Total data achieved demand: 4967
+
+Condition: Traffic demand: 10, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6752(67%)
+Total bandwidth: 71606
+Blocked bandwidth: 48418(67%)
+Bandwidth achieved demand: 3011(92%)
+Total expected bandwidth: 24696
+Total requested expected bandwidth: 23188
+Total data achieved demand: 3076
+MinCostFlow
+Blocked demand:491(4%)
+Total bandwidth: 71606
+Blocked bandwidth: 3708(5%)
+Bandwidth achieved demand: 4985(52%)
+Total expected bandwidth: 60979
+Total requested expected bandwidth: 67898
+Total data achieved demand: 4985
+Backup
+Blocked demand:3411(34%)
+Total bandwidth: 71606
+Blocked bandwidth: 25668(35%)
+Bandwidth achieved demand: 4442(67%)
+Total expected bandwidth: 81867
+Total requested expected bandwidth: 45938
+Total data achieved demand: 4930
+
+Condition: Traffic demand: 15, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6768(67%)
+Total bandwidth: 72357
+Blocked bandwidth: 48486(67%)
+Bandwidth achieved demand: 3004(92%)
+Total expected bandwidth: 25396
+Total requested expected bandwidth: 23871
+Total data achieved demand: 3073
+MinCostFlow
+Blocked demand:595(5%)
+Total bandwidth: 72357
+Blocked bandwidth: 5043(6%)
+Bandwidth achieved demand: 4936(52%)
+Total expected bandwidth: 60232
+Total requested expected bandwidth: 67314
+Total data achieved demand: 4936
+Backup
+Blocked demand:3933(39%)
+Total bandwidth: 72357
+Blocked bandwidth: 31423(43%)
+Bandwidth achieved demand: 4103(67%)
+Total expected bandwidth: 72523
+Total requested expected bandwidth: 40934
+Total data achieved demand: 4602
+
+Condition: Traffic demand: 20, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6816(68%)
+Total bandwidth: 72649
+Blocked bandwidth: 49633(68%)
+Bandwidth achieved demand: 2933(92%)
+Total expected bandwidth: 24472
+Total requested expected bandwidth: 23016
+Total data achieved demand: 3015
+MinCostFlow
+Blocked demand:688(6%)
+Total bandwidth: 72649
+Blocked bandwidth: 6207(8%)
+Bandwidth achieved demand: 4899(52%)
+Total expected bandwidth: 59534
+Total requested expected bandwidth: 66442
+Total data achieved demand: 4899
+Backup
+Blocked demand:4582(45%)
+Total bandwidth: 72649
+Blocked bandwidth: 37656(51%)
+Bandwidth achieved demand: 3692(68%)
+Total expected bandwidth: 61762
+Total requested expected bandwidth: 34993
+Total data achieved demand: 4104
+
+Condition: Traffic demand: 25, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6856(68%)
+Total bandwidth: 71904
+Blocked bandwidth: 49272(68%)
+Bandwidth achieved demand: 2916(92%)
+Total expected bandwidth: 24112
+Total requested expected bandwidth: 22632
+Total data achieved demand: 2992
+MinCostFlow
+Blocked demand:1227(12%)
+Total bandwidth: 71904
+Blocked bandwidth: 10989(15%)
+Bandwidth achieved demand: 4674(53%)
+Total expected bandwidth: 54387
+Total requested expected bandwidth: 60915
+Total data achieved demand: 4674
+Backup
+Blocked demand:4956(49%)
+Total bandwidth: 71904
+Blocked bandwidth: 40863(56%)
+Bandwidth achieved demand: 3439(68%)
+Total expected bandwidth: 54594
+Total requested expected bandwidth: 31041
+Total data achieved demand: 3812
+
+Condition: Traffic demand: 30, Holding time: 4, Total traffic: 10000, Max route: 3, Avg repair time: 5 Shape: 5, Scale: 10
+Propose
+Blocked demand:6830(68%)
+Total bandwidth: 72249
+Blocked bandwidth: 49619(68%)
+Bandwidth achieved demand: 2888(91%)
+Total expected bandwidth: 24079
+Total requested expected bandwidth: 22630
+Total data achieved demand: 2971
+MinCostFlow
+Blocked demand:1528(15%)
+Total bandwidth: 72249
+Blocked bandwidth: 13682(18%)
+Bandwidth achieved demand: 4451(52%)
+Total expected bandwidth: 52041
+Total requested expected bandwidth: 58567
+Total data achieved demand: 4451
+Backup
+Blocked demand:5360(53%)
+Total bandwidth: 72249
+Blocked bandwidth: 45097(62%)
+Bandwidth achieved demand: 3161(68%)
+Total expected bandwidth: 47893
+Total requested expected bandwidth: 27152
+Total data achieved demand: 3533
