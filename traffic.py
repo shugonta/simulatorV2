@@ -26,7 +26,8 @@ class Traffic:
         self.total_data = 0
 
     def LinkUsedCostFunc(self, x):
-        return pow(x, 2)
+        return 0
+        # return pow(x, 2)
 
     def AdaptiveOptimize(self, solution, link_list, available_link_list, assigned_capacity, t, K, p, q, nodes, quality):
         m = grb.Model()
