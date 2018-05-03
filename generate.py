@@ -154,7 +154,7 @@ link_list = {}
 # トラフィック要求発生
 TRAFFIC_DEMAND = int(argv[1])  # 一秒当たりの平均トラフィック発生量
 HOLDING_TIME = 4  # 平均トラフィック保持時間
-TOTAL_TRAFFIC = 10000  # 総トラフィック量
+TOTAL_TRAFFIC = 1000  # 総トラフィック量
 MAX_ROUTE = 3  # 一つの要求に使用される最大ルート数
 AVERAGE_REPAIRED_TIME = 5
 

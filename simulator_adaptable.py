@@ -7,7 +7,6 @@ import copy
 import time as tm
 import route_calc_variables
 
-
 from link import Link
 from traffic import Traffic
 from traffic import RouteCalcType
@@ -600,6 +599,7 @@ while True:
                             write_log4("Link %d->%d remove bandwidth: %d\n" % (i, j, link.bandwidth))
                         active_traffic.routes.append(route)
                         total_expected_bandwidth4 += route_reliability * route_bandwidth
+
                 active_traffic_list4.append(active_traffic)
             else:
                 # 最適解なし
