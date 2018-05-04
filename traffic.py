@@ -33,6 +33,7 @@ class Traffic:
         m = grb.Model()
         variables = RouteCalcVariables()
         m.setParam('OutputFlag', False)
+        m.setParam('TimeLimit', 60)
         bandwidth_max = 0
         N = range(0, self.COST_FUNCTION_GRANULARITY + 1)
         link_used_cost = {}
@@ -236,7 +237,8 @@ class Traffic:
         if routing_type == RouteCalcType.ExpectedCapacityGuarantee:
             m = grb.Model()
             variables = RouteCalcVariables()
-            m.setParam('OutputFlag', 0)
+            m.setParam('OutputFlag', False)
+            m.setParam('TimeLimit', 60)
 
             # 変数追加
             for (i, j), link_item in link_list.items():
@@ -297,7 +299,8 @@ class Traffic:
         elif routing_type == RouteCalcType.MinCostFlow:
             m = grb.Model()
             variables = RouteCalcVariables()
-            m.setParam('OutputFlag', 0)
+            m.setParam('OutputFlag', False)
+            m.setParam('TimeLimit', 60)
 
             for (i, j), link_item in link_list.items():
                 if link_item.failure_status == 0:
@@ -351,7 +354,8 @@ class Traffic:
         elif routing_type == RouteCalcType.Backup:
             m = grb.Model()
             variables = RouteCalcVariables()
-            m.setParam('OutputFlag', 0)
+            m.setParam('OutputFlag', False)
+            m.setParam('TimeLimit', 60)
 
             for (i, j), link_item in link_list.items():
                 if link_item.failure_status == 0:

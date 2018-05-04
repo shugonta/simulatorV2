@@ -10,17 +10,17 @@ from define import Define
 
 
 def get_bandwidth_rand():
-    i = rnd.randint(0, 3)
+    i = rnd.randint(0, 2)
     if i == 0:
-        return 1
+        return 5
     elif i == 1:
-        return 4
+        return 10
     elif i == 2:
-        return 8
-    elif i == 3:
-        return 16
+        return 20
+    # elif i == 3:
+    #     return 40
     else:
-        return 1
+        return 10
 
 
 def get_quality_rand():
