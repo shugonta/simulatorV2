@@ -22,7 +22,7 @@ class Link:
         :param scale: int
         """
         self.distance = distance
-        self.bandwidth = bandwidth
+        self.bandwidth = self.initial_bandwidth = bandwidth
         self.failure_rate = failure_rate
         self.failure_status = failure_status
         self.shape = shape

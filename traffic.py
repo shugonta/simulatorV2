@@ -86,7 +86,7 @@ class Traffic:
             m.addConstr(grb.quicksum(variables.z[n, i, j] for n in N) == 1, name="restrict link used cost func for link (%d, %d)" % (i, j))
             if link_list[i, j].bandwidth != 0:
                 for n in N:
-                    m.addConstr(grb.quicksum(variables.y[k, i, j] for k in K) / link_list[i, j].bandwidth * variables.z[n, i, j] <= link_used_cost_threshold[n],
+                    m.addConstr(grb.quicksum(variables.y[k, i, j] for k in K) / link_list[i, j].initial_bandwidth * variables.z[n, i, j] <= link_used_cost_threshold[n],
                                 name="link occupation rate for link (%d, %d) at cost %d" % (i, j, n))
         m.addConstr(grb.quicksum(variables.b[k] for k in K) >= assigned_capacity, name="required capacity requirement")
         m.addConstr(grb.quicksum(variables.b[k] for k in K) - grb.quicksum(
