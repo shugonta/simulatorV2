@@ -564,7 +564,7 @@ while True:
             K = range(1, MAX_ROUTE + 1)
 
             # ルート計算
-            actual_holding_time = traffic_item.CalcRoute(solution, RouteCalcType.AdaptableExpectedCapacityGurantee, MAX_ROUTE, node_size, current_link_list4, current_available_link_list)
+            actual_holding_time = traffic_item.CalcRoute(solution, RouteCalcType.AdaptableExpectedCapacityGuarantee, MAX_ROUTE, node_size, current_link_list4, current_available_link_list)
             if not actual_holding_time:
                 print("Undefined route calculation type\n")
                 exit(-1)

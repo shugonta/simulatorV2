@@ -10,7 +10,7 @@ class RouteCalcType(Enum):
     MinCostFlow = 1
     Backup = 2
     ExpectedCapacityGuarantee = 3
-    AdaptableExpectedCapacityGurantee = 4
+    AdaptableExpectedCapacityGuarantee = 4
 
 
 class Traffic:
@@ -412,7 +412,7 @@ class Traffic:
 
             m.optimize()
             solution.setValues(m, variables, self.holding_time)
-        elif routing_type == RouteCalcType.AdaptableExpectedCapacityGurantee:
+        elif routing_type == RouteCalcType.AdaptableExpectedCapacityGuarantee:
             solution_list = {}  # type: dict[int, Solution]
             for (i, j), link_item in link_list.items():
                 if link_item.failure_status == 0:
