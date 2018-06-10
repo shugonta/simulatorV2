@@ -183,6 +183,15 @@ total_data_achieved_demand = 0
 total_data_achieved_demand2 = 0
 total_data_achieved_demand3 = 0
 total_data_achieved_demand4 = 0
+total_data_requested = 0
+total_data_requested2 = 0
+total_data_requested3 = 0
+total_data_requested4 = 0
+total_data_tramsmitted = 0
+total_data_tramsmitted2 = 0
+total_data_tramsmitted3 = 0
+total_data_tramsmitted4 = 0
+
 
 while True:
     write_log("\nSimulation Time: %d\n" % time)
@@ -238,6 +247,7 @@ while True:
                 write_log("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
                                                                                         active_traffic.traffic.bandwidth, active_traffic.traffic.quality, active_traffic.traffic.holding_time,
                                                                                         total_bandwidth))
+            total_data_tramsmitted += active_traffic.traffic.total_data
             active_traffic_list.remove(active_traffic)
     write_log(show_links(current_link_list))
     if len(traffic_list) > 0:
@@ -266,6 +276,7 @@ while True:
                                 routes[k - 1][(i, j)] = Link(current_link_list[(i, j)].distance, solution.variables["y"][(k, i, j)], current_link_list[(i, j)].failure_rate, 0, define.shape,
                                                              define.scale)
                 total_requested_expected_bandwidth += traffic_item.bandwidth * traffic_item.quality
+                total_data_requested += traffic_item.bandwidth * traffic_item.quality * traffic_item.holding_time
                 write_log("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
                     traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
                     traffic_item.quality, actual_holding_time))
@@ -346,6 +357,7 @@ while True:
                 write_log2("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
                                                                                          active_traffic.traffic.bandwidth, active_traffic.traffic.quality, active_traffic.traffic.holding_time,
                                                                                          total_bandwidth))
+            total_data_tramsmitted2 += active_traffic.traffic.total_data
             active_traffic_list2.remove(active_traffic)
     write_log2(show_links(current_link_list2))
     if len(traffic_list) > 0:
@@ -368,6 +380,7 @@ while True:
                             if solution.variables["y"][(k, i, j)] != 0:
                                 routes[k - 1][(i, j)] = Link(current_link_list2[(i, j)].distance, solution.variables["y"][(k, i, j)], current_link_list2[(i, j)].failure_rate, 0)
                 total_requested_expected_bandwidth2 += traffic_item.bandwidth * traffic_item.quality
+                total_data_requested2 += traffic_item.bandwidth * traffic_item.quality * traffic_item.holding_time
                 write_log2("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
                     traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
                     traffic_item.quality, actual_holding_time))
@@ -446,6 +459,7 @@ while True:
                 write_log3("[Achieve Total Data Failed(%d)] %d->%d (%d, %f, %d) %d\n" % (active_traffic.traffic.id, active_traffic.traffic.start_node, active_traffic.traffic.end_node,
                                                                                          active_traffic.traffic.bandwidth, active_traffic.traffic.quality, active_traffic.traffic.holding_time,
                                                                                          total_bandwidth))
+            total_data_tramsmitted3 += active_traffic.traffic.total_data
             active_traffic_list3.remove(active_traffic)
     write_log3(show_links(current_link_list3))
     if len(traffic_list) > 0:
@@ -471,6 +485,7 @@ while True:
                                                              current_link_list3[(i, j)].failure_rate,
                                                              0)
                 total_requested_expected_bandwidth3 += traffic_item.bandwidth * traffic_item.quality
+                total_data_requested3 += traffic_item.bandwidth * traffic_item.quality * traffic_item.holding_time
                 write_log3("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
                     traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
                     traffic_item.quality, actual_holding_time))
@@ -555,6 +570,7 @@ while True:
                                                                                          total_bandwidth))
             if not bandwidth_lowering and total_data_failed:
                 print(active_traffic.traffic.id)
+            total_data_tramsmitted4 += active_traffic.traffic.total_data
             active_traffic_list4.remove(active_traffic)
     write_log4(show_links(current_link_list4))
     if len(traffic_list) > 0:
@@ -580,6 +596,7 @@ while True:
                                                              current_link_list4[(i, j)].failure_rate,
                                                              0)
                 total_requested_expected_bandwidth4 += traffic_item.bandwidth * traffic_item.quality
+                total_data_requested4 += traffic_item.bandwidth * traffic_item.quality * traffic_item.holding_time
                 write_log4("[Accepted(%d)] %d->%d (%d, %f) for %d  \n" % (
                     traffic_item.id, traffic_item.start_node, traffic_item.end_node, traffic_item.bandwidth * traffic_item.holding_time,
                     traffic_item.quality, actual_holding_time))
@@ -650,33 +667,33 @@ with open(RESULT_FILE, "a") as f:
                define.avg_repaired_time, define.shape, define.scale))
     f.write("Propose\n")
     f.write(
-        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\n"
+        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\nTotal data transmitted: %d\nTotal data requested: %d\n"
         % (blocked_demand, blocked_demand * 100 / TOTAL_TRAFFIC, total_requested_bandwidth, blocked_bandwidth,
            blocked_bandwidth / total_requested_bandwidth * 100,
            request_achieved_demand, (request_achieved_demand * 100 / (
             TOTAL_TRAFFIC - blocked_demand) if TOTAL_TRAFFIC - blocked_demand != 0 else 0),
-           total_expected_bandwidth, total_requested_expected_bandwidth, total_data_achieved_demand))
+           total_expected_bandwidth, total_requested_expected_bandwidth, total_data_achieved_demand, total_data_tramsmitted, total_data_requested))
     f.write("MinCostFlow\n")
     f.write(
-        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\n"
+        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\nTotal data transmitted: %d\nTotal data requested: %d\n"
         % (blocked_demand2, blocked_demand2 * 100 / TOTAL_TRAFFIC, total_requested_bandwidth, blocked_bandwidth2,
            blocked_bandwidth2 / total_requested_bandwidth * 100,
            request_achieved_demand2, request_achieved_demand2 * 100 / (TOTAL_TRAFFIC - blocked_demand2),
-           total_expected_bandwidth2, total_requested_expected_bandwidth2, total_data_achieved_demand2))
+           total_expected_bandwidth2, total_requested_expected_bandwidth2, total_data_achieved_demand2, total_data_tramsmitted2, total_data_requested2))
     f.write("Backup\n")
     f.write(
-        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\n"
+        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\nTotal data transmitted: %d\nTotal data requested: %d\n"
         % (blocked_demand3, blocked_demand3 * 100 / TOTAL_TRAFFIC, total_requested_bandwidth, blocked_bandwidth3,
            blocked_bandwidth3 / total_requested_bandwidth * 100,
            request_achieved_demand3, request_achieved_demand3 * 100 / (TOTAL_TRAFFIC - blocked_demand3),
-           total_expected_bandwidth3, total_requested_expected_bandwidth3, total_data_achieved_demand3))
+           total_expected_bandwidth3, total_requested_expected_bandwidth3, total_data_achieved_demand3, total_data_tramsmitted3, total_data_requested3))
     f.write("Adaptable\n")
     f.write(
-        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\n"
+        "Blocked demand:%d(%d%%)\nTotal bandwidth: %d\nBlocked bandwidth: %d(%d%%)\nBandwidth achieved demand: %d(%d%%)\nTotal expected bandwidth: %d\nTotal requested expected bandwidth: %d\nTotal data achieved demand: %d\nTotal data transmitted: %d\nTotal data requested: %d\n"
         % (blocked_demand4, blocked_demand4 * 100 / TOTAL_TRAFFIC, total_requested_bandwidth, blocked_bandwidth4,
            blocked_bandwidth4 / total_requested_bandwidth * 100,
            request_achieved_demand4, request_achieved_demand4 * 100 / (TOTAL_TRAFFIC - blocked_demand4),
-           total_expected_bandwidth4, total_requested_expected_bandwidth4, total_data_achieved_demand4))
+           total_expected_bandwidth4, total_requested_expected_bandwidth4, total_data_achieved_demand4, total_data_tramsmitted4, total_data_requested4))
 
 end_time = tm.time()
 
