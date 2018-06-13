@@ -133,7 +133,7 @@ class Traffic:
         for t in range(max_noval_lower, min_val, delta):
             if t not in solution_list:
                 solution_list[t] = Solution()
-                self.AdaptiveOptimize(solution_list[t], link_list, available_link_list, required_total_capacity / t, t, K, p, q, nodes, quality)
+                self.AdaptiveOptimize(solution_list[t], link_list, available_link_list, math.ceil(required_total_capacity / t), t, K, p, q, nodes, quality)
             if solution_list[t].isOptimized():
                 if t < min_val:
                     min_val = t
@@ -150,7 +150,7 @@ class Traffic:
         for t in range(max_val, min_noval_upper, delta):
             if t not in solution_list:
                 solution_list[t] = Solution()
-                self.AdaptiveOptimize(solution_list[t], link_list, available_link_list, required_total_capacity / t, t, K, p, q, nodes, quality)
+                self.AdaptiveOptimize(solution_list[t], link_list, available_link_list, math.ceil(required_total_capacity / t), t, K, p, q, nodes, quality)
             if solution_list[t].isOptimized():
                 if t > max_val:
                     max_val = t
@@ -183,7 +183,7 @@ class Traffic:
         :param direction:
         :return:
         """
-        assigned_capacity = required_total_capacity / t
+        assigned_capacity = math.ceil(required_total_capacity / t)
         print("assigned_capacity2: %f" % assigned_capacity)
         if t not in solution_list:
             solution_list[t] = Solution()
