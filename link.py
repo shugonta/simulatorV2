@@ -22,7 +22,8 @@ class Link:
         :param scale: int
         """
         self.distance = distance
-        self.bandwidth = self.initial_bandwidth = bandwidth
+        self.bandwidth = bandwidth
+        self.initial_bandwidth = bandwidth
         self.failure_rate = failure_rate
         self.failure_status = failure_status
         self.shape = shape
@@ -35,8 +36,15 @@ class Link:
         :type holding_time: int
         :return:
         """
-        reliability = math.exp(
-            (pow(self.age, self.shape) - pow(self.age + holding_time, self.shape)) / pow(self.scale, self.shape))
+        reliability_old = math.exp((pow(self.age, self.shape) - pow(self.age + holding_time, self.shape)) / pow(self.scale, self.shape))
+        fraction = 1
+        denominator = 1
+        for i in range(1, self.age + holding_time + 1):
+            pdf = self.get_weibull_pdf(self.shape, self.scale, i)
+            fraction -= pdf
+            if i <= self.age:
+                denominator -= pdf
+        reliability = fraction / denominator
         return reliability
 
     def update_link_failure_rate(self):
@@ -70,6 +78,19 @@ class Link:
         return failure_rate
 
     @staticmethod
+    def get_weibull_pdf(shape, scale, t):
+        """
+
+                :param shape: float
+                :param scale: float
+                :param t: float
+                :return: float
+                """
+        # print("%d:%d:%d\n" %(shape,scale,t))
+        pdf = (shape / scale) * math.pow((t / scale), shape - 1) * math.exp(-1 * math.pow((t / scale), shape))
+        return pdf
+
+    @staticmethod
     def is_failure(p_failure_rate):
         random = rnd.random()
         return p_failure_rate > random
@@ -81,7 +102,7 @@ class Link:
         return repaire_probability > random
 
     @classmethod
-    def write_log(cls,msg):
+    def write_log(cls, msg):
         try:
             f = open(cls.LOG_FILE, 'a')
             f.write(msg)
@@ -92,7 +113,7 @@ class Link:
             cls.write_log(msg)
 
     @classmethod
-    def write_log2(cls,msg):
+    def write_log2(cls, msg):
         try:
             f = open(cls.LOG_FILE2, 'a')
             f.write(msg)
@@ -103,7 +124,7 @@ class Link:
             cls.write_log2(msg)
 
     @classmethod
-    def write_log3(cls,msg):
+    def write_log3(cls, msg):
         try:
             f = open(cls.LOG_FILE3, 'a')
             f.write(msg)
@@ -114,7 +135,7 @@ class Link:
             cls.write_log3(msg)
 
     @classmethod
-    def write_log4(cls,msg):
+    def write_log4(cls, msg):
         try:
             f = open(cls.LOG_FILE4, 'a')
             f.write(msg)
@@ -126,18 +147,18 @@ class Link:
 
     def get_scale_rand(self):
         if self.scale == 0:
-            return  10
+            return 10
         else:
             return self.scale
-        # i = rnd.randint(0, 2)
-        # if i == 0:
-        #     return 100
-        # if i == 1:
-        #     return 33
-        # if i == 2:
-        #     return 20
-        # else:
-        #     return 100
+            # i = rnd.randint(0, 2)
+            # if i == 0:
+            #     return 100
+            # if i == 1:
+            #     return 33
+            # if i == 2:
+            #     return 20
+            # else:
+            #     return 100
 
     @classmethod
     def process_link_status(cls, link_list, link_list2, link_list3, link_list4, traffic_list, traffic_list2, traffic_list3, traffic_list4, average_repaired_time):
