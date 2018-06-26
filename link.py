@@ -36,15 +36,24 @@ class Link:
         :type holding_time: int
         :return:
         """
-        reliability_old = math.exp((pow(self.age, self.shape) - pow(self.age + holding_time, self.shape)) / pow(self.scale, self.shape))
-        fraction = 1
-        denominator = 1
-        for i in range(1, self.age + holding_time + 1):
-            pdf = self.get_weibull_pdf(self.shape, self.scale, i)
-            fraction -= pdf
-            if i <= self.age:
-                denominator -= pdf
-        reliability = fraction / denominator
+        # reliability_old = math.exp((pow(self.age, self.shape) - pow(self.age + holding_time, self.shape)) / pow(self.scale, self.shape))
+        # fraction = 1
+        # denominator = 1
+        # for i in range(1, self.age + holding_time + 1):
+        #     pdf = self.get_weibull_pdf(self.shape, self.scale, i)
+        #     fraction -= pdf
+        #     if i <= self.age:
+        #         denominator -= pdf
+        # reliability = fraction / denominator
+        reliability = 1
+        nofailure_rate = 1
+        for i in range(self.age, self.age + holding_time + 1):
+            failure_rate = nofailure_rate * self.get_weibull_failure_rate(self.shape, self.scale, i)
+            reliability -= failure_rate
+            if reliability < 0:
+                return 0
+            nofailure_rate = 1 - failure_rate
+
         return reliability
 
     def update_link_failure_rate(self):
