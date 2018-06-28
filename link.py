@@ -48,11 +48,11 @@ class Link:
         reliability = 1
         nofailure_rate = 1
         for i in range(self.age, self.age + holding_time + 1):
+            nofailure_rate *= 1 - self.get_weibull_failure_rate(self.shape, self.scale, i - 1)
             failure_rate = nofailure_rate * self.get_weibull_failure_rate(self.shape, self.scale, i)
             reliability -= failure_rate
             if reliability < 0:
                 return 0
-            nofailure_rate = 1 - failure_rate
 
         return reliability
 
@@ -84,6 +84,8 @@ class Link:
         """
         # print("%d:%d:%d\n" %(shape,scale,t))
         failure_rate = ((shape * pow(t, (shape - 1))) / pow(scale, shape))
+        if failure_rate >= 1:
+            return 1
         return failure_rate
 
     @staticmethod
