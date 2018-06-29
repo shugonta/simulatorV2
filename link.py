@@ -47,12 +47,12 @@ class Link:
         # reliability = fraction / denominator
         reliability = 1
         nofailure_rate = 1
-        for i in range(self.age, self.age + holding_time + 1):
-            nofailure_rate *= 1 - self.get_weibull_failure_rate(self.shape, self.scale, i - 1)
+        for i in range(self.age, self.age + holding_time):
             failure_rate = nofailure_rate * self.get_weibull_failure_rate(self.shape, self.scale, i)
             reliability -= failure_rate
             if reliability < 0:
                 return 0
+            nofailure_rate *= 1 - self.get_weibull_failure_rate(self.shape, self.scale, i)
 
         return reliability
 
