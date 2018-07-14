@@ -28,9 +28,9 @@ def get_quality_rand():
 
 
 def get_nodes_rand(p_node_size):
-    start_node = rnd.randint(1, p_node_size - 1)
+    start_node = rnd.randint(1, p_node_size)
     while True:
-        end_node = rnd.randint(1, p_node_size - 1)
+        end_node = rnd.randint(1, p_node_size)
         if start_node != end_node:
             break
     return [start_node, end_node]
