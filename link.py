@@ -1,5 +1,6 @@
 import math
 import random as rnd
+import numpy
 import sys
 
 
@@ -103,7 +104,7 @@ class Link:
 
     @staticmethod
     def is_failure(p_failure_rate):
-        random = rnd.random()
+        random = numpy.random.rand()
         return p_failure_rate > random
 
     @staticmethod
@@ -302,6 +303,10 @@ class Link:
                     else:
                         # 年齢加算
                         link_item.add_age()
+                        link_list2[(link_item_key[0], link_item_key[1])].add_age()
+                        link_list3[(link_item_key[0], link_item_key[1])].add_age()
+                        link_list4[(link_item_key[0], link_item_key[1])].add_age()
+
                 else:
                     # リンク故障しているとき
                     if cls.is_repaired(average_repaired_time, link_item.failure_status):
