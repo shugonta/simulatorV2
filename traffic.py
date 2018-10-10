@@ -81,8 +81,8 @@ class Traffic:
                                 == 0, name="flow reservation at node %d route %d" % (i, k))
 
         for (i, j) in available_link_list:
-            # m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
-            m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, assigned_capacity), name="capacity requirement at (%d, %d)" % (i, j))
+            m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
+            # m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, assigned_capacity), name="capacity requirement at (%d, %d)" % (i, j))
             m.addConstr(grb.quicksum(variables.z[n, i, j] for n in N) == 1, name="restrict link used cost func for link (%d, %d)" % (i, j))
             if link_list[i, j].bandwidth != 0:
                 for n in N:
@@ -274,8 +274,8 @@ class Traffic:
                                     == 0, name="flow reservation at node %d route %d" % (i, k))
 
             for (i, j) in available_link_list:
-                m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, required_capacity), name="capacity requirement at (%d, %d)" % (i, j))
-                # m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
+                # m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= min(link_list[(i, j)].bandwidth, required_capacity), name="capacity requirement at (%d, %d)" % (i, j))
+                m.addConstr(0 <= grb.quicksum(variables.y[k, i, j] for k in K) <= link_list[(i, j)].bandwidth, name="capacity requirement at (%d, %d)" % (i, j))
 
             m.addConstr(grb.quicksum(variables.b[k] for k in K) >= required_capacity, name="required capacity requirement")
             m.addConstr(grb.quicksum(variables.b[k] for k in K) - grb.quicksum(
